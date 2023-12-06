@@ -61,8 +61,11 @@ void Edge<T>::setWeight(double weight) {
     Edge::weight = weight;
 }
 
-/*
- * Auxiliary function to find a vertex with a given content.
+/**
+ * @brief Find a vertex with content in
+ * @tparam T
+ * @param in Content
+ * @return Pointer to vertex
  */
 template <class T>
 Vertex<T> * Graph<T>::findVertex(const T &in) const {
@@ -122,10 +125,11 @@ void Vertex<T>::setAdj(const vector<Edge<T>> &adj) {
     Vertex::adj = adj;
 }
 
-
-/*
- *  Adds a vertex with a given content or info (in) to a graph (this).
- *  Returns true if successful, and false if a vertex with that content already exists.
+/**
+ * @brief Add vertex with a given content to the graph
+ * @tparam T
+ * @param in Content
+ * @return True if sucessful, false if vertex already exists
  */
 template <class T>
 bool Graph<T>::addVertex(const T &in) {
@@ -135,11 +139,13 @@ bool Graph<T>::addVertex(const T &in) {
     return true;
 }
 
-
-/*
- * Adds an edge to a graph (this), given the contents of the source and
- * destination vertices and the edge weight (w).
- * Returns true if successful, and false if the source or destination vertex does not exist.
+/**
+ * @brief Add edge to the graph
+ * @tparam T
+ * @param sourc Source of edge
+ * @param dest Destination of edge
+ * @param w Weight of edge
+ * @return True if sucessful, false if source or destination vertex does not exist
  */
 template <class T>
 bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
@@ -151,20 +157,23 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
     return true;
 }
 
-/*
- * Auxiliary function to add an outgoing edge to a vertex (this),
- * with a given destination vertex (d) and edge weight (w).
+/**
+ * @brief Add outgoing edge to the vertex
+ * @tparam T
+ * @param d Destination
+ * @param w Weight
  */
 template <class T>
 void Vertex<T>::addEdge(Vertex<T> *d, double w) {
     adj.push_back(Edge<T>(d, w));
 }
 
-
-/*
- * Removes an edge from a graph (this).
- * The edge is identified by the source (sourc) and destination (dest) contents.
- * Returns true if successful, and false if such edge does not exist.
+/**
+ * @brief Remove edge from graph
+ * @tparam T
+ * @param sourc Source
+ * @param dest Destination
+ * @return True if sucessful, false if edge does not exist
  */
 template <class T>
 bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
@@ -175,10 +184,11 @@ bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
     return v1->removeEdgeTo(v2);
 }
 
-/*
- * Auxiliary function to remove an outgoing edge (with a given destination (d))
- * from a vertex (this).
- * Returns true if successful, and false if such edge does not exist.
+/**
+ * @brief Remove an outgoing edge
+ * @tparam T
+ * @param d Destination
+ * @return True if sucessful, false if edge does not exist
  */
 template <class T>
 bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
@@ -190,10 +200,11 @@ bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
     return false;
 }
 
-/*
- *  Removes a vertex with a given content (in) from a graph (this), and
- *  all outgoing and incoming edges.
- *  Returns true if successful, and false if such vertex does not exist.
+/**
+ * @brief Remove vertex with content in from graph, and remove all outgoing and incoming edges
+ * @tparam T
+ * @param in Content
+ * @return True if sucessful, false if such vertex does not exist
  */
 template <class T>
 bool Graph<T>::removeVertex(const T &in) {
@@ -209,12 +220,10 @@ bool Graph<T>::removeVertex(const T &in) {
     return false;
 }
 
-
-/****************** DFS ********************/
-/*
- * Performs a depth-first search (dfs) traversal in a graph (this).
- * Returns a vector with the contents of the vertices by dfs order.
- * Follows the algorithm described in theoretical classes.
+/**
+ * @brief Performs a depth-first search (dfs) traversal in a graph (this)
+ * @tparam T
+ * @return Vector with the contents of the vertices by dfs order.
  */
 template <class T>
 vector<T> Graph<T>::dfs() const {
@@ -227,9 +236,11 @@ vector<T> Graph<T>::dfs() const {
     return res;
 }
 
-/*
- * Auxiliary function that visits a vertex (v) and its adjacent, recursively.
- * Updates a parameter with the list of visited node contents.
+/**
+ * @brief Visit a vertex and its adjacent recursively. Updates v with visited node contents
+ * @tparam T
+ * @param v Vertex to visit
+ * @param res Visited node contents
  */
 template <class T>
 void Graph<T>::dfsVisit(Vertex<T> *v, vector<T> & res) const {
@@ -242,12 +253,11 @@ void Graph<T>::dfsVisit(Vertex<T> *v, vector<T> & res) const {
     }
 }
 
-
-/****************** DFS ********************/
-/*
- * Performs a depth-first search (dfs) in a graph (this).
- * Returns a vector with the contents of the vertices by dfs order,
- * from the source node.
+/**
+ * @brief Performs a depth-first search (dfs) in a graph (this).
+ * @tparam T
+ * @param source Source node
+ * @return Vector with the contents of the vertices by dfs order,
  */
 template <class T>
 vector<T> Graph<T>::dfs(const T & source) const {
@@ -263,12 +273,12 @@ vector<T> Graph<T>::dfs(const T & source) const {
     return res;
 }
 
-
-/****************** BFS ********************/
-/*
- * Performs a breadth-first search (bfs) in a graph (this), starting
- * from the vertex with the given source contents (source).
- * Returns a vector with the contents of the vertices by bfs order.
+/**
+ * @brief Performs a breadth-first search (bfs) in a graph (this), starting from the vertex with the
+ * given source contents (source).
+ * @tparam T
+ * @param source Source contents
+ * @return Vector with contents of the vertices by bfs order
  */
 template <class T>
 vector<T> Graph<T>::bfs(const T & source) const {
@@ -296,16 +306,12 @@ vector<T> Graph<T>::bfs(const T & source) const {
     return res;
 }
 
-
-/****************** isDAG  ********************/
-/*
- * Performs a depth-first search in a graph (this), to determine if the graph
+/**
+ * @brief Performs a depth-first search in a graph (this), to determine if the graph
  * is acyclic (acyclic directed graph or DAG).
- * During the search, a cycle is found if an edge connects to a vertex
- * that is being processed in the stack of recursive calls (see theoretical classes).
- * Returns true if the graph is acyclic, and false otherwise.
+ * @tparam T
+ * @return True if the graph is acyclic, and false otherwise
  */
-
 template <class T>
 bool Graph<T>::isDAG() const {
     for (auto v : vertexSet) {
@@ -320,8 +326,10 @@ bool Graph<T>::isDAG() const {
 }
 
 /**
- * Auxiliary function that visits a vertex (v) and its adjacent, recursively.
- * Returns false (not acyclic) if an edge to a vertex in the stack is found.
+ * @brief Visits a vertex (v) and its adjacent, recursively
+ * @tparam T
+ * @param v Vertex to visit
+ * @return False (not acyclic) if an edge to a vertex in the stack is found
  */
 template <class T>
 bool Graph<T>::dfsIsDAG(Vertex<T> *v) const {
@@ -339,11 +347,6 @@ bool Graph<T>::dfsIsDAG(Vertex<T> *v) const {
     return true;
 }
 
-
-/****************** toposort ********************/
-//=============================================================================
-// Exercise 1: Topological Sorting
-//=============================================================================
 // TODO
 /*
  * Performs a topological sorting of the vertices of a graph (this).
