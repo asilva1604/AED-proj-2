@@ -61,9 +61,6 @@ void Edge<T>::setWeight(double weight) {
     Edge::weight = weight;
 }
 
-/*
- * Auxiliary function to find a vertex with a given content.
- */
 template <class T>
 Vertex<T> * Graph<T>::findVertex(const T &in) const {
     for (auto v : vertexSet)
@@ -92,11 +89,6 @@ void Vertex<T>::setAdj(const vector<Edge<T>> &adj) {
     Vertex::adj = adj;
 }
 
-
-/*
- *  Adds a vertex with a given content or info (in) to a graph (this).
- *  Returns true if successful, and false if a vertex with that content already exists.
- */
 template <class T>
 bool Graph<T>::addVertex(const T &in) {
     if ( findVertex(in) != NULL)
@@ -105,12 +97,6 @@ bool Graph<T>::addVertex(const T &in) {
     return true;
 }
 
-
-/*
- * Adds an edge to a graph (this), given the contents of the source and
- * destination vertices and the edge weight (w).
- * Returns true if successful, and false if the source or destination vertex does not exist.
- */
 template <class T>
 bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
     auto v1 = findVertex(sourc);
@@ -121,21 +107,11 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
     return true;
 }
 
-/*
- * Auxiliary function to add an outgoing edge to a vertex (this),
- * with a given destination vertex (d) and edge weight (w).
- */
 template <class T>
 void Vertex<T>::addEdge(Vertex<T> *d, double w) {
     adj.push_back(Edge<T>(d, w));
 }
 
-
-/*
- * Removes an edge from a graph (this).
- * The edge is identified by the source (sourc) and destination (dest) contents.
- * Returns true if successful, and false if such edge does not exist.
- */
 template <class T>
 bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
     auto v1 = findVertex(sourc);
@@ -145,11 +121,6 @@ bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
     return v1->removeEdgeTo(v2);
 }
 
-/*
- * Auxiliary function to remove an outgoing edge (with a given destination (d))
- * from a vertex (this).
- * Returns true if successful, and false if such edge does not exist.
- */
 template <class T>
 bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
     for (auto it = adj.begin(); it != adj.end(); it++)
@@ -160,11 +131,6 @@ bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
     return false;
 }
 
-/*
- *  Removes a vertex with a given content (in) from a graph (this), and
- *  all outgoing and incoming edges.
- *  Returns true if successful, and false if such vertex does not exist.
- */
 template <class T>
 bool Graph<T>::removeVertex(const T &in) {
     for (auto it = vertexSet.begin(); it != vertexSet.end(); it++)
@@ -179,16 +145,6 @@ bool Graph<T>::removeVertex(const T &in) {
     return false;
 }
 
-
-//=============================================================================
-// Exercise 1.1: Depth First Search
-//=============================================================================
-// Subexercise 1.1.1: Depth First Search (Graph Traversal)
-//=============================================================================
-/*
- * Performs a depth-first search (dfs) traversal in a graph (this).
- * Returns a vector with the contents of the vertices by dfs order.
- */
 // TODO
 template <class T>
 vector<T> Graph<T>::dfs() const {
@@ -204,10 +160,6 @@ vector<T> Graph<T>::dfs() const {
     return res;
 }
 
-/*
- * Auxiliary function that visits a vertex (v) and its adjacent, recursively.
- * Updates a parameter with the list of visited node contents.
- */
 // TODO
 template <class T>
 void Graph<T>::dfsVisit(Vertex<T> *v, vector<T> & res) const {
@@ -220,14 +172,6 @@ void Graph<T>::dfsVisit(Vertex<T> *v, vector<T> & res) const {
     }
 }
 
-//=============================================================================
-// Subexercise 1.1.2: Depth First Search (From a source node)
-//=============================================================================
-/*
- * Performs a depth-first search (dfs) in a graph (this).
- * Returns a vector with the contents of the vertices by dfs order,
- * from the source node.
- */
 // TODO
 template <class T>
 vector<T> Graph<T>::dfs(const T & source) const {
@@ -249,3 +193,15 @@ vector<T> Graph<T>::dfs(const T & source) const {
     }
     return res;
 }
+template<class T>
+bool Graph<T>::dfsIsDAG(Vertex<T> *v) const {
+    //TODO
+    return false;
+}
+
+template<class T>
+vector<T> Graph<T>::bfs(const T &source) const {
+    //TODO
+    return vector<T>();
+}
+

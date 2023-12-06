@@ -68,5 +68,4 @@ public:
     vector<T> bfs(const T &source) const;
 };
 
-
 #endif //AED_PROJ_2_GRAPH_H
