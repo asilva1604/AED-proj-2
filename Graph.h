@@ -5,14 +5,17 @@
 #ifndef AED_PROJ_2_GRAPH_H
 #define AED_PROJ_2_GRAPH_H
 
+#include <cstddef>
 #include <vector>
-#include <cstdlib>
+#include <queue>
+#include <stack>
+#include <list>
+
+using namespace std;
 
 template <class T> class Edge;
 template <class T> class Graph;
 template <class T> class Vertex;
-
-using std::vector;
 
 template <class T>
 class Vertex {
@@ -20,6 +23,9 @@ class Vertex {
     vector<Edge<T> > adj;  // list of outgoing edges
     bool visited;          // auxiliary field
     bool processing;       // auxiliary field
+    int indegree;          // auxiliary field
+    int num;               // auxiliary field
+    int low;               // auxiliary field
 
     void addEdge(Vertex<T> *dest, double w);
     bool removeEdgeTo(Vertex<T> *d);
@@ -33,6 +39,19 @@ public:
     void setProcessing(bool p);
     const vector<Edge<T>> &getAdj() const;
     void setAdj(const vector<Edge<T>> &adj);
+
+    int getIndegree() const;
+
+    void setIndegree(int indegree);
+
+    int getNum() const;
+
+    void setNum(int num);
+
+    int getLow() const;
+
+    void setLow(int low);
+
     friend class Graph<T>;
 };
 
@@ -52,7 +71,11 @@ public:
 
 template <class T>
 class Graph {
-    vector<Vertex<T> *> vertexSet;    // vertex set
+    vector<Vertex<T> *> vertexSet;      // vertex set
+    int _index_;                        // auxiliary field
+    stack<Vertex<T>> _stack_;           // auxiliary field
+    list<list<T>> _list_sccs_;        // auxiliary field
+
     void dfsVisit(Vertex<T> *v,  vector<T> & res) const;
     bool dfsIsDAG(Vertex<T> *v) const;
 public:
@@ -66,6 +89,8 @@ public:
     vector<T> dfs() const;
     vector<T> dfs(const T & source) const;
     vector<T> bfs(const T &source) const;
+    vector<T> topsort() const;
+    bool isDAG() const;
 };
 
 #endif //AED_PROJ_2_GRAPH_H
