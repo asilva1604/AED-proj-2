@@ -10,6 +10,7 @@
 #include <queue>
 #include <stack>
 #include <list>
+#include "Airline.h"
 
 using namespace std;
 
@@ -27,7 +28,7 @@ class Vertex {
     int num;               // auxiliary field
     int low;               // auxiliary field
 
-    void addEdge(Vertex<T> *dest, double w);
+    void addEdge(Vertex<T> *dest, double w, const Airline &airline);
     bool removeEdgeTo(Vertex<T> *d);
 public:
     Vertex(T in);
@@ -58,13 +59,15 @@ public:
 template <class T>
 class Edge {
     Vertex<T> * dest;      // destination vertex
+    const Airline &airline_;
     double weight;         // edge weight
 public:
-    Edge(Vertex<T> *d, double w);
+    Edge(Vertex<T> *d, double w, const Airline &airline);
     Vertex<T> *getDest() const;
     void setDest(Vertex<T> *dest);
     double getWeight() const;
     void setWeight(double weight);
+    const Airline &getAirline() const;
     friend class Graph<T>;
     friend class Vertex<T>;
 };
@@ -83,7 +86,7 @@ public:
     int getNumVertex() const;
     bool addVertex(const T &in);
     bool removeVertex(const T &in);
-    bool addEdge(const T &sourc, const T &dest, double w);
+    bool addEdge(const T &sourc, const T &dest, double w, const Airline &airline);
     bool removeEdge(const T &sourc, const T &dest);
     vector<Vertex<T> * > getVertexSet() const;
     vector<T> dfs() const;

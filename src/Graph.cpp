@@ -8,7 +8,7 @@ template <class T>
 Vertex<T>::Vertex(T in): info(in) {}
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *d, double w): dest(d), weight(w) {}
+Edge<T>::Edge(Vertex<T> *d, double w, const Airline &airline): dest(d), weight(w), airline_(airline){}
 
 
 template <class T>
@@ -148,12 +148,12 @@ bool Graph<T>::addVertex(const T &in) {
  * @return True if sucessful, false if source or destination vertex does not exist
  */
 template <class T>
-bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
+bool Graph<T>::addEdge(const T &sourc, const T &dest, double w, const Airline &airline) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
     if (v1 == NULL || v2 == NULL)
         return false;
-    v1->addEdge(v2,w);
+    v1->addEdge(v2,w, airline);
     return true;
 }
 
@@ -164,8 +164,8 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
  * @param w Weight
  */
 template <class T>
-void Vertex<T>::addEdge(Vertex<T> *d, double w) {
-    adj.push_back(Edge<T>(d, w));
+void Vertex<T>::addEdge(Vertex<T> *d, double w, const Airline &airline) {
+    adj.push_back(Edge<T>(d, w, airline));
 }
 
 /**
@@ -360,4 +360,9 @@ vector<T> Graph<T>::topsort() const {
     vector<T> res;
 
     return res;
+}
+
+template<class T>
+const Airline &Edge<T>::getAirline() const{
+    return airline_;
 }

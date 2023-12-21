@@ -13,3 +13,9 @@ Airport::Airport(const std::string &code, const std::string &name, const std::st
     latitude_ = latitude;
     longitude_ = longitude;
 }
+
+const std::string &Airport::getCode() const {
+    return code_;
+}
+
+Airport::Airport() = default;

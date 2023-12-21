@@ -14,6 +14,8 @@ class Airline {
     std::string country_;
 public:
     Airline(const std::string &code, const std::string &name, const std::string &callsign, const std::string &country);
+    const std::string &getCode() const;
+    Airline();
 };
 
 

@@ -18,6 +18,8 @@ class Airport {
 public:
     Airport(const std::string &code, const std::string &name, const std::string &city, const std::string &country,
             const std::string &latitude, const std::string &longitude);
+    Airport();
+    const std::string &getCode() const;
 
 };
 

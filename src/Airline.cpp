@@ -11,3 +11,9 @@ Airline::Airline(const std::string &code, const std::string &name, const std::st
     callsign_ = callsign;
     country_ = country;
 }
+
+const std::string &Airline::getCode() const {
+    return code_;
+}
+
+Airline::Airline() = default;
