@@ -3,6 +3,14 @@ project(AED_proj_2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(AED_proj_2 main.cpp
-        Graph.cpp
-        Graph.h)
+add_executable(AED_proj_2 src/main.cpp
+        src/Graph.cpp
+        src/Graph.h
+        src/Application.cpp
+        src/Application.h
+        src/FileReader.cpp
+        src/FileReader.h
+        src/Airline.cpp
+        src/Airline.h
+        src/Airport.cpp
+        src/Airport.h)
