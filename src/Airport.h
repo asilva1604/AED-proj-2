@@ -20,6 +20,7 @@ public:
             const std::string &latitude, const std::string &longitude);
     Airport();
     const std::string &getCode() const;
+    bool operator==(const Airport &other);
 
 };
 

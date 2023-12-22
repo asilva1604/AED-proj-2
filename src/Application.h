@@ -5,7 +5,6 @@
 #ifndef AED_PROJ_2_APPLICATION_H
 #define AED_PROJ_2_APPLICATION_H
 
-#include "Graph.h"
 #include "FileReader.h"
 #include <vector>
 #include "Airline.h"
@@ -27,6 +26,5 @@ public:
     Airline getAirline(const std::string &code) const;
 };
 
-template class Graph<Airport>;
 
 #endif //AED_PROJ_2_APPLICATION_H

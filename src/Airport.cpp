@@ -18,4 +18,9 @@ const std::string &Airport::getCode() const {
     return code_;
 }
 
+bool Airport::operator==(const Airport &other) {
+    if (other.getCode() == code_) return true;
+    return false;
+}
+
 Airport::Airport() = default;
