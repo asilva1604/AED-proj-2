@@ -119,11 +119,11 @@ public:
     vector<T> bfs(const T &source) const;
     vector<T> topsort() const;
     bool isDAG() const;
-    size_t getNumEdge();
+    size_t getNumEdge() const;
 };
 
 template<class T>
-size_t Graph<T>::getNumEdge() {
+size_t Graph<T>::getNumEdge() const{
     return edgeCount_;
 }
 

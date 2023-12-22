@@ -28,4 +28,8 @@ std::ostream &operator<<(std::ostream &stream, const Airport &airport) {
     return stream;
 }
 
+const std::string &Airport::getCity() const {
+    return city_;
+}
+
 Airport::Airport() = default;

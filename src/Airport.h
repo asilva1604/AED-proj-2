@@ -23,7 +23,7 @@ public:
     const std::string &getCode() const;
     bool operator==(const Airport &other);
     friend std::ostream& operator<<(std::ostream &stream, const Airport &airport);
-
+    const std::string &getCity() const;
 };
 
 
