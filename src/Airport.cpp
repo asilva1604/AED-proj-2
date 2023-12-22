@@ -23,4 +23,9 @@ bool Airport::operator==(const Airport &other) {
     return false;
 }
 
+std::ostream &operator<<(std::ostream &stream, const Airport &airport) {
+    stream << airport.code_;
+    return stream;
+}
+
 Airport::Airport() = default;

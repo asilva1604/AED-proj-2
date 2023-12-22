@@ -50,3 +50,11 @@ Airline Application::getAirline(const string &code) const {
     }
     return Airline();
 }
+
+const Graph<Airport> &Application::getGraph() {
+    return flightNetwork_;
+}
+
+const std::vector<Airport> &Application::getAirports() {
+    return airports_;
+}

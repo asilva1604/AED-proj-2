@@ -6,6 +6,7 @@
 #define AED_PROJ_2_AIRPORT_H
 
 #include <string>
+#include <iostream>
 
 class Airport {
     std::string code_;
@@ -21,6 +22,7 @@ public:
     Airport();
     const std::string &getCode() const;
     bool operator==(const Airport &other);
+    friend std::ostream& operator<<(std::ostream &stream, const Airport &airport);
 
 };
 

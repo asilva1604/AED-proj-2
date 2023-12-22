@@ -24,6 +24,8 @@ public:
     Application();
     Airport getAirport(const std::string &code) const;
     Airline getAirline(const std::string &code) const;
+    const Graph<Airport> &getGraph();
+    const std::vector<Airport> &getAirports();
 };
 
 
