@@ -70,3 +70,17 @@ size_t Application::getAirportCount() {
 size_t Application::getFlightCount() {
     return flightNetwork_->getNumEdge();
 }
+
+size_t Application::flightsOutboundOfAirport(const string &airportCode) {
+    auto airportObj = getAirport(airportCode);
+    auto *airport = flightNetwork_->findVertex(airportObj);
+
+    return airport->getAdj().size();
+}
+
+size_t Application::airlinesOutboundOfAirport(const std::string &airportCode) {
+    auto airportObj = getAirport(airportCode);
+    auto *airport = flightNetwork_->findVertex(airportObj);
+
+    return airport->getNumDifferentAirlines();
+}
