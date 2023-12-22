@@ -11,14 +11,15 @@
 #include "Airport.h"
 #include "Graph.h"
 #include <algorithm>
+#include <memory>
 
 /**
  * The  Application  class for using  and managing our system
  */
 class Application {
-    std::vector<Airport> airports_;
-    std::vector<Airline> airlines_;
-    Graph<Airport> flightNetwork_;
+    std::unique_ptr<std::vector<Airport>> airports_;
+    std::unique_ptr<std::vector<Airline>> airlines_;
+    std::unique_ptr<Graph<Airport>> flightNetwork_;
 
 public:
     Application();
