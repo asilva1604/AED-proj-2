@@ -12,6 +12,7 @@
 #include <list>
 #include <algorithm>
 #include "Airline.h"
+#include <unordered_set>
 
 using namespace std;
 
@@ -57,8 +58,21 @@ public:
 
     void setLow(int low);
 
+    size_t getNumDifferentAirlines();
+
     friend class Graph<T>;
 };
+
+template<class T>
+size_t Vertex<T>::getNumDifferentAirlines() {
+    std::unordered_set<std::string> airlines;
+
+    for (const Edge<T> e : adj) {
+        airlines.insert(e.getAirline().getCode());
+    }
+
+    return airlines.size();
+}
 
 
 template <class T>
