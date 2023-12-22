@@ -5,6 +5,6 @@
 int main() {
     std::cout << "Hello, World!" << std::endl;
     Application app;
-    std::cout << app.inboundFlightsPerCity("Porto");
+    std::cout << app.flightsPerAirline("TAP");
     return 0;
 }

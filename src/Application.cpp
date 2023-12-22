@@ -122,3 +122,20 @@ size_t Application::inboundFlightsPerCity(const string &city) {
 
     return res;
 }
+
+size_t Application::totalFlightsPerCity(const string &city) {
+    return inboundFlightsPerCity(city) + outboundFlightsPerCity(city);
+}
+
+size_t Application::flightsPerAirline(const string &airlineCode) {
+    size_t res = 0;
+    auto vertexVector = flightNetwork_->getVertexSet();
+
+    for (Vertex<Airport> *vertex : vertexVector) {
+        for (const Edge<Airport> &edge : vertex->getAdj()) {
+            if (edge.getAirline().getCode() == airlineCode) ++res;
+        }
+    }
+
+    return res;
+}

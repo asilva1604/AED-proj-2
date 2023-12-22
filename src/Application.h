@@ -37,6 +37,8 @@ public:
     //3.3
     size_t outboundFlightsPerCity(const std::string &city);
     size_t inboundFlightsPerCity(const std::string &city);
+    size_t totalFlightsPerCity(const std::string &city);
+    size_t flightsPerAirline(const std::string &airlineCode);
 };
 
 
