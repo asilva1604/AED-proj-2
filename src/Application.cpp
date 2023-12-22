@@ -35,6 +35,8 @@ Application::Application()
 
         flightNetwork_->addEdge(sourceAirport, destinationAirport, 0, airline);
     }
+
+    std::cout << "Constructor has done it's job.\n";
 }
 
 Airport Application::getAirport(const std::string &code) const {
@@ -83,4 +85,57 @@ size_t Application::airlinesOutboundOfAirport(const std::string &airportCode) {
     auto *airport = flightNetwork_->findVertex(airportObj);
 
     return airport->getNumDifferentAirlines();
+}
+
+size_t Application::outboundFlightsPerCity(const string &city) {
+    auto vertexVector = flightNetwork_->getVertexSet();
+
+    std::vector<Vertex<Airport> *> airportsInCity;
+
+    for (Vertex<Airport> *vertex : vertexVector) {
+        if (vertex->getInfo().getCity() == city) {
+            airportsInCity.push_back(vertex);
+        }
+    }
+
+    size_t res = 0;
+
+    for (const Vertex<Airport> *vertex : airportsInCity) {
+        res += vertex->getAdj().size();
+    }
+
+    return res;
+}
+
+size_t Application::inboundFlightsPerCity(const string &city) {
+    auto vertexVector = flightNetwork_->getVertexSet();
+
+    size_t res = 0;
+
+    for (Vertex<Airport> *vertex : vertexVector) {
+        if (vertex->getInfo().getCity() == city) continue;
+
+        for (const Edge<Airport> &e : vertex->getAdj()) {
+            if (e.getDest()->getInfo().getCity() == city) ++res;
+        }
+    }
+
+    return res;
+}
+
+size_t Application::totalFlightsPerCity(const string &city) {
+    return inboundFlightsPerCity(city) + outboundFlightsPerCity(city);
+}
+
+size_t Application::flightsPerAirline(const string &airlineCode) {
+    size_t res = 0;
+    auto vertexVector = flightNetwork_->getVertexSet();
+
+    for (Vertex<Airport> *vertex : vertexVector) {
+        for (const Edge<Airport> &edge : vertex->getAdj()) {
+            if (edge.getAirline().getCode() == airlineCode) ++res;
+        }
+    }
+
+    return res;
 }

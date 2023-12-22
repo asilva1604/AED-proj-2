@@ -29,8 +29,16 @@ public:
     const std::vector<Airport> &getAirports();
     size_t getAirportCount();
     size_t getFlightCount();
+
+    //3.2
     size_t flightsOutboundOfAirport(const std::string &airportCode);
     size_t airlinesOutboundOfAirport(const std::string &airportCode);
+
+    //3.3
+    size_t outboundFlightsPerCity(const std::string &city);
+    size_t inboundFlightsPerCity(const std::string &city);
+    size_t totalFlightsPerCity(const std::string &city);
+    size_t flightsPerAirline(const std::string &airlineCode);
 };
 
 
