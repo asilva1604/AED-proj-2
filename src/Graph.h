@@ -88,6 +88,7 @@ class Graph {
     int _index_;                        // auxiliary field
     stack<Vertex<T>> _stack_;           // auxiliary field
     list<list<T>> _list_sccs_;        // auxiliary field
+    size_t edgeCount_ = 0;
 
     void dfsVisit(Vertex<T> *v,  vector<T> & res) const;
     bool dfsIsDAG(Vertex<T> *v) const;
@@ -104,8 +105,13 @@ public:
     vector<T> bfs(const T &source) const;
     vector<T> topsort() const;
     bool isDAG() const;
-    bool hasIncomingEdges(Vertex<T> * v);
+    size_t getNumEdge();
 };
+
+template<class T>
+size_t Graph<T>::getNumEdge() {
+    return edgeCount_;
+}
 
 /****************** Provided constructors and functions ********************/
 
@@ -253,6 +259,7 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w, const Airline &a
     if (v1 == NULL || v2 == NULL)
         return false;
     v1->addEdge(v2,w, airline);
+    ++edgeCount_;
     return true;
 }
 

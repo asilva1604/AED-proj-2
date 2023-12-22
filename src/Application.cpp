@@ -62,3 +62,11 @@ const Graph<Airport> &Application::getGraph() {
 const std::vector<Airport> &Application::getAirports() {
     return *airports_;
 }
+
+size_t Application::getAirportCount() {
+    return airports_->size();
+}
+
+size_t Application::getFlightCount() {
+    return flightNetwork_->getNumEdge();
+}
