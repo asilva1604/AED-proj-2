@@ -13,4 +13,6 @@ add_executable(AED_proj_2 src/main.cpp
         src/Airport.cpp
         src/Airport.h
         src/Graph.h
+        src/Interface.cpp
+        src/Interface.h
 )

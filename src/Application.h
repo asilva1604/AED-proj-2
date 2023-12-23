@@ -47,6 +47,12 @@ public:
     vector<Vertex<Airport> *> getAirportsInCity(const string &city);
 
     size_t numberOfCitiesFromAirport(const string &airportCode);
+
+    size_t numberOfAirportsFromAirportWithStops(const string &airportCode, int steps);
+
+    size_t numberOfCitiesFromAirportWithStops(const string &airportCode, int stops);
+
+    size_t numberOfCountriesFromAirportWithStops(const string &airportCode, int stops);
 };
 
 

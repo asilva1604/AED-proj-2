@@ -193,3 +193,36 @@ size_t Application::numberOfCitiesFromAirport(const std::string &airportCode){
 
     return cities.size();
 }
+
+size_t Application::numberOfAirportsFromAirportWithStops(const std::string &airportCode, int stops){
+    auto airportObj = getAirport(airportCode);
+    auto *airport = flightNetwork_->findVertex(airportObj);
+
+    return flightNetwork_->bfsWithSteps(airport->getInfo(), stops).size();
+}
+
+size_t Application::numberOfCitiesFromAirportWithStops(const std::string &airportCode, int stops){
+    auto airportObj = getAirport(airportCode);
+    auto *airport = flightNetwork_->findVertex(airportObj);
+
+    unordered_set<std::string> cities;
+
+    for (const Airport& airport1 : flightNetwork_->bfsWithSteps(airport->getInfo(), stops)){
+        cities.insert(airport1.getCity());
+    }
+
+    return cities.size();
+}
+
+size_t Application::numberOfCountriesFromAirportWithStops(const std::string &airportCode, int stops){
+    auto airportObj = getAirport(airportCode);
+    auto *airport = flightNetwork_->findVertex(airportObj);
+
+    unordered_set<std::string> countries;
+
+    for (const Airport& airport1 : flightNetwork_->bfsWithSteps(airport->getInfo(), stops)){
+        countries.insert(airport1.getCountry());
+    }
+
+    return countries.size();
+}
