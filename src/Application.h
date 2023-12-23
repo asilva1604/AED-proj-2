@@ -39,6 +39,12 @@ public:
     size_t inboundFlightsPerCity(const std::string &city);
     size_t totalFlightsPerCity(const std::string &city);
     size_t flightsPerAirline(const std::string &airlineCode);
+
+    size_t numberOfDifferentCountriesAirportFliesTo(const string &airportCode);
+
+    size_t numberOfDifferentCountriesCityFliesTo(const string &city);
+
+    vector<Vertex<Airport> *> getAirportsInCity(const string &city);
 };
 
 

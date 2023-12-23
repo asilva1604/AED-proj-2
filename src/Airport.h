@@ -24,6 +24,8 @@ public:
     bool operator==(const Airport &other);
     friend std::ostream& operator<<(std::ostream &stream, const Airport &airport);
     const std::string &getCity() const;
+
+    const std::string &getCountry() const;
 };
 
 

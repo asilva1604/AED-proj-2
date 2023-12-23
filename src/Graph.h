@@ -61,6 +61,8 @@ public:
     size_t getNumDifferentAirlines();
 
     friend class Graph<T>;
+
+    size_t getNumDifferentCountries();
 };
 
 template<class T>

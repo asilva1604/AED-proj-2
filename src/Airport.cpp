@@ -32,4 +32,8 @@ const std::string &Airport::getCity() const {
     return city_;
 }
 
+const std::string &Airport::getCountry() const {
+    return country_;
+}
+
 Airport::Airport() = default;
