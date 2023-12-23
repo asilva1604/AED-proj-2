@@ -180,3 +180,16 @@ size_t Application::numberOfDifferentCountriesCityFliesTo(const std::string &cit
 
     return res;
 }
+
+size_t Application::numberOfCitiesFromAirport(const std::string &airportCode){
+    auto airportObj = getAirport(airportCode);
+    auto *airport = flightNetwork_->findVertex(airportObj);
+
+    unordered_set<std::string> cities;
+
+    for (const Edge<Airport>& edge : airport->getAdj()){
+        cities.insert(edge.getDest()->getInfo().getCity());
+    }
+
+    return cities.size();
+}
