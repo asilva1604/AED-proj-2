@@ -35,8 +35,6 @@ Application::Application()
 
         flightNetwork_->addEdge(sourceAirport, destinationAirport, 0, airline);
     }
-
-    std::cout << "Constructor has done it's job.\n";
 }
 
 Airport Application::getAirport(const std::string &code) const {

@@ -1,10 +1,8 @@
-#include <iostream>
 #include "Application.h"
-#include "Graph.h"
+#include "Interface.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    Application app;
-    std::cout << app.numberOfCountriesFromAirportWithStops("KEF", 1);
+    Interface anInterface;
+    anInterface.run();
     return 0;
 }
