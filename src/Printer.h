@@ -134,3 +134,8 @@ void printHelper(std::vector<std::wstring> helpers, const std::vector<int>& sele
         std::wcout << italic << helpers[selection] << end_italic << std::endl;
     }
 }
+
+void printMaximizeWarning(){
+    std::wstring maximize_string = L" PLease maximize your window for a better experience!";
+    std::wcout << L"\n" << wstring(getTerminalWidth() / 2 - maximize_string.length() / 2, L' ') << maximize_string << std::endl;
+}

@@ -53,13 +53,14 @@ void Interface::run(){
             case 0:       //============================= LOADING SCREEN ===============================//
 
                 appThread = std::thread([this](){
-                    Application app;
+                    app = std::make_shared<Application>();
                     is_done = true;
                 });
 
                 while(!is_done){
                     printAnimatedAirplane(airplaneLoadingScreen, 100);
                     printTextLoadingData();
+                    printMaximizeWarning();
                 }
 
                 location = 1;

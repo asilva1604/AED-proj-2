@@ -53,6 +53,8 @@ public:
     size_t numberOfCitiesFromAirportWithStops(const string &airportCode, int stops);
 
     size_t numberOfCountriesFromAirportWithStops(const string &airportCode, int stops);
+
+    std::vector<std::pair<std::string, std::string>> tripsWithGreatestNumberOfStops(const string &airportCode);
 };
 
 

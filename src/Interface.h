@@ -38,6 +38,8 @@ private:
     std::wstring end = L"\033[0m";
     //----------------------------------------------------//
 
+    std::shared_ptr<Application> app;
+
     int location = 0;
 
     unsigned int user_input;
@@ -46,8 +48,6 @@ private:
 
     bool is_done = false;
     bool write_mode = false;
-
-
 
     std::thread appThread;
 

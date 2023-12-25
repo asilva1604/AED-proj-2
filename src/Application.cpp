@@ -196,7 +196,7 @@ size_t Application::numberOfAirportsFromAirportWithStops(const std::string &airp
     auto airportObj = getAirport(airportCode);
     auto *airport = flightNetwork_->findVertex(airportObj);
 
-    return flightNetwork_->bfsWithSteps(airport->getInfo(), stops).size();
+    return flightNetwork_->bfsWithSteps(airport->getInfo(), stops).size() - 1;
 }
 
 size_t Application::numberOfCitiesFromAirportWithStops(const std::string &airportCode, int stops){
@@ -205,7 +205,10 @@ size_t Application::numberOfCitiesFromAirportWithStops(const std::string &airpor
 
     unordered_set<std::string> cities;
 
-    for (const Airport& airport1 : flightNetwork_->bfsWithSteps(airport->getInfo(), stops)){
+    std::vector<Airport> airportsInRange = flightNetwork_->bfsWithSteps(airport->getInfo(), stops);
+    airportsInRange.erase(airportsInRange.begin());
+
+    for (const Airport& airport1 : airportsInRange){
         cities.insert(airport1.getCity());
     }
 
@@ -218,9 +221,27 @@ size_t Application::numberOfCountriesFromAirportWithStops(const std::string &air
 
     unordered_set<std::string> countries;
 
-    for (const Airport& airport1 : flightNetwork_->bfsWithSteps(airport->getInfo(), stops)){
+    std::vector<Airport> airportsInRange = flightNetwork_->bfsWithSteps(airport->getInfo(), stops);
+    airportsInRange.erase(airportsInRange.begin());
+
+    for (const Airport& airport1 : airportsInRange){
         countries.insert(airport1.getCountry());
     }
 
     return countries.size();
+}
+
+std::vector<std::pair<std::string, std::string>> Application::tripsWithGreatestNumberOfStops(const std::string &airportCode){
+    auto airportObj = getAirport(airportCode);
+    auto *airport = flightNetwork_->findVertex(airportObj);
+
+    std::vector<Airport> mostStops = flightNetwork_->bfsFurthestVertices(airport->getInfo());
+    std::vector<std::pair<std::string, std::string>> trips;
+
+    for (const Airport& dest_airport : mostStops){
+        std::cout << airport->getInfo().getCity() << " " << dest_airport.getCity() << std::endl;
+        trips.emplace_back(airport->getInfo().getCode(), dest_airport.getCode());
+    }
+
+    return trips;
 }
