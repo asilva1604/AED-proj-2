@@ -12,10 +12,15 @@ Airport::Airport(const std::string &code, const std::string &name, const std::st
     country_ = country;
     latitude_ = latitude;
     longitude_ = longitude;
+    wcode_ = std::wstring(code.begin(), code.end());
 }
 
 const std::string &Airport::getCode() const {
     return code_;
+}
+
+const std::wstring &Airport::getWcode() const {
+    return wcode_;
 }
 
 bool Airport::operator==(const Airport &other) {
@@ -30,6 +35,10 @@ std::ostream &operator<<(std::ostream &stream, const Airport &airport) {
 
 const std::string &Airport::getCity() const {
     return city_;
+}
+
+const std::string &Airport::getCountry() const {
+    return country_;
 }
 
 Airport::Airport() = default;

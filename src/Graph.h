@@ -11,8 +11,10 @@
 #include <stack>
 #include <list>
 #include <algorithm>
-#include "Airline.h"
 #include <unordered_set>
+#include "Airline.h"
+#include "Airport.h"
+
 
 using namespace std;
 
@@ -120,6 +122,10 @@ public:
     vector<T> topsort() const;
     bool isDAG() const;
     size_t getNumEdge() const;
+
+    vector<T> bfsWithSteps(const T &source, int step) const;
+
+    vector<T> bfsFurthestVertices(const T &source) const;
 };
 
 template<class T>
@@ -411,12 +417,93 @@ vector<T> Graph<T>::bfs(const T & source) const {
         auto v = q.front();
         q.pop();
         res.push_back(v->info);
-        for (auto & e : v->adj) {
+        for (auto &e: v->adj) {
             auto w = e.dest;
-            if ( ! w->visited ) {
+            if (!w->visited) {
                 q.push(w);
                 w->visited = true;
             }
+        }
+    }
+    return res;
+}
+
+/****************** BFS ********************/
+/*
+ * Performs a breadth-first search (bfs) in a graph (this), starting
+ * from the vertex with the given source contents (source).
+ * Returns a vector with the contents of the vertices by bfs order.
+ */
+template <class T>
+vector<T> Graph<T>::bfsWithSteps(const T & source, int step) const {
+    int count = 0;
+    int count_level_elements = 0;
+    vector<T> res;
+    auto s = findVertex(source);
+    if (s == NULL)
+        return res;
+    queue<Vertex<T> *> q;
+    for (auto v : vertexSet)
+        v->visited = false;
+    q.push(s);
+    s->visited = true;
+    while (!q.empty()) {
+        auto v = q.front();
+        q.pop();
+        res.push_back(v->info);
+        if (count < step) {
+            for (auto &e: v->adj) {
+                auto w = e.dest;
+                if (!w->visited) {
+                    q.push(w);
+                    w->visited = true;
+                    count_level_elements ++;
+                }
+            }
+            if (q.size() == count_level_elements) {
+                count_level_elements = 0;
+                count++;
+            }
+        }
+    }
+    return res;
+}
+
+/****************** BFS ********************/
+/*
+ * Performs a breadth-first search (bfs) in a graph (this), starting
+ * from the vertex with the given source contents (source).
+ * Returns a vector with the contents of the vertices by bfs order.
+ */
+template <class T>
+vector<T> Graph<T>::bfsFurthestVertices(const T & source) const {
+    int count_level_elements = 0;
+    vector<T> res;
+    auto s = findVertex(source);
+    if (s == NULL)
+        return res;
+    queue<Vertex<T> *> q;
+    for (auto v : vertexSet)
+        v->visited = false;
+    q.push(s);
+    s->visited = true;
+    while (!q.empty()) {
+        auto v = q.front();
+        q.pop();
+        res.push_back(v->info);
+        for (auto &e: v->adj) {
+            auto w = e.dest;
+            if (!w->visited) {
+                q.push(w);
+                w->visited = true;
+                count_level_elements ++;
+            }
+        }
+        if (q.size() == count_level_elements) {
+            if (count_level_elements != 0){
+                res.clear();
+            }
+            count_level_elements = 0;
         }
     }
     return res;

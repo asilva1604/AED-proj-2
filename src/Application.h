@@ -39,6 +39,22 @@ public:
     size_t inboundFlightsPerCity(const std::string &city);
     size_t totalFlightsPerCity(const std::string &city);
     size_t flightsPerAirline(const std::string &airlineCode);
+
+    size_t numberOfDifferentCountriesAirportFliesTo(const string &airportCode);
+
+    size_t numberOfDifferentCountriesCityFliesTo(const string &city);
+
+    vector<Vertex<Airport> *> getAirportsInCity(const string &city);
+
+    size_t numberOfCitiesFromAirport(const string &airportCode);
+
+    size_t numberOfAirportsFromAirportWithStops(const string &airportCode, int steps);
+
+    size_t numberOfCitiesFromAirportWithStops(const string &airportCode, int stops);
+
+    size_t numberOfCountriesFromAirportWithStops(const string &airportCode, int stops);
+
+    std::vector<std::pair<std::string, std::string>> tripsWithGreatestNumberOfStops(const string &airportCode);
 };
 
 

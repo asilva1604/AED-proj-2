@@ -15,6 +15,7 @@ class Airport {
     std::string country_;
     std::string latitude_;
     std::string longitude_;
+    std::wstring wcode_;
 
 public:
     Airport(const std::string &code, const std::string &name, const std::string &city, const std::string &country,
@@ -24,6 +25,10 @@ public:
     bool operator==(const Airport &other);
     friend std::ostream& operator<<(std::ostream &stream, const Airport &airport);
     const std::string &getCity() const;
+
+    const std::string &getCountry() const;
+
+    const std::wstring &getWcode() const;
 };
 
 
