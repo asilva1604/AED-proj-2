@@ -41,4 +41,8 @@ const std::string &Airport::getCountry() const {
     return country_;
 }
 
+bool Airport::operator<(const Airport &obj) const{
+    return this->code_<obj.code_;
+}
+
 Airport::Airport() = default;

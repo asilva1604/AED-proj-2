@@ -29,6 +29,8 @@ public:
     const std::string &getCountry() const;
 
     const std::wstring &getWcode() const;
+
+    bool operator<(const Airport &obj) const;
 };
 
 

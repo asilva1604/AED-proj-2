@@ -12,6 +12,7 @@
 #include "Graph.h"
 #include <algorithm>
 #include <memory>
+#include <set>
 
 /**
  * The  Application  class for using  and managing our system
@@ -40,13 +41,15 @@ public:
     size_t totalFlightsPerCity(const std::string &city);
     size_t flightsPerAirline(const std::string &airlineCode);
 
+    //3.4
     size_t numberOfDifferentCountriesAirportFliesTo(const string &airportCode);
-
     size_t numberOfDifferentCountriesCityFliesTo(const string &city);
-
     vector<Vertex<Airport> *> getAirportsInCity(const string &city);
 
+    //3.5
     size_t numberOfCitiesFromAirport(const string &airportCode);
+    size_t numberOfAirportsFromAirport(const string &airportCode);
+    size_t numberOfCountriesFromAirport(const string &airportCode);
 
     size_t numberOfAirportsFromAirportWithStops(const string &airportCode, int steps);
 

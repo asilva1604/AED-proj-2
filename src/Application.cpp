@@ -245,3 +245,29 @@ std::vector<std::pair<std::string, std::string>> Application::tripsWithGreatestN
 
     return trips;
 }
+
+size_t Application::numberOfAirportsFromAirport(const string &airportCode) {
+    auto airportObj = getAirport(airportCode);
+    auto *airport = flightNetwork_->findVertex(airportObj);
+
+    std::set<Airport> airports;
+
+    for (const Edge<Airport>& edge : airport->getAdj()){
+        airports.insert(edge.getDest()->getInfo());
+    }
+
+    return airports.size();
+}
+
+size_t Application::numberOfCountriesFromAirport(const string &airportCode) {
+    auto airportObj = getAirport(airportCode);
+    auto *airport = flightNetwork_->findVertex(airportObj);
+
+    std::set<std::string> cities;
+
+    for (const Edge<Airport>& edge : airport->getAdj()){
+        cities.insert(edge.getDest()->getInfo().getCity());
+    }
+
+    return cities.size();
+}
