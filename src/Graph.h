@@ -596,4 +596,5 @@ vector<T> Graph<T>::topsort() const {
     return res;
 }
 
+
 #endif //AED_PROJ_2_GRAPH_H

@@ -279,7 +279,7 @@ size_t Application::numberOfCountriesFromAirport(const string &airportCode) {
     return cities.size();
 }
 
-std::vector<Airport> Application::airportsWithGreatestTrafficCapacity(size_t k) {
+std::vector<Airport> Application::airportsWithGreatestTrafficCapacity(size_t k) const{
     auto copy(flightNetwork_->getVertexSet());
 
     std::sort(copy.begin(), copy.end(), [](Vertex<Airport> *obj1, Vertex<Airport> *obj2) {
@@ -294,3 +294,58 @@ std::vector<Airport> Application::airportsWithGreatestTrafficCapacity(size_t k) 
 
     return res;
 }
+
+void dfsArt(Vertex<Airport> *v, int &index, std::set<Airport> &articulationPoints) {
+    v->setVisited(true);
+    v->setNum(index);
+    v->setLow(index);
+    index++;
+
+    int children = 0;
+
+    for (auto &e : v->getAdj()) {
+        auto w = e.getDest();
+
+        if (!w->isVisited()) {
+            children++;
+            dfsArt(w, index, articulationPoints);
+            v->setLow(min(v->getLow(), w->getLow()));
+
+            if (v->getNum() == 0 && children > 1) {
+                // Special case for the root of DFS tree
+                articulationPoints.insert(v->getInfo());
+            } else if (v->getNum() != 0 && w->getLow() >= v->getNum()) {
+                // Regular articulation point
+                articulationPoints.insert(v->getInfo());
+            }
+        } else if (w->getNum() < v->getNum()) {
+            // Back edge, update low value
+            v->setLow(min(v->getLow(), w->getNum()));
+        }
+    }
+}
+
+std::set<Airport> Application::findArticulationPoints() const{
+    std::set<Airport> articulationPoints;
+    int index = 0;
+
+    for (auto &v : flightNetwork_->getVertexSet()) {
+        v->setVisited(false);
+        v->setNum(0);
+    }
+
+    for (auto &v : flightNetwork_->getVertexSet()) {
+        if (!v->isVisited()) {
+            dfsArt(v, index, articulationPoints);
+        }
+    }
+
+    return articulationPoints;
+}
+
+std::set<Airport> Application::essentialAirports() const {
+    std::set<Airport> res = findArticulationPoints();
+    return res;
+}
+
+

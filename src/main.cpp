@@ -6,10 +6,8 @@ int main() {
     //anInterface.run();
     Application app;
 
-    auto vec = app.airportsWithGreatestTrafficCapacity(5);
+    auto vec = app.essentialAirports();
 
-    for (const auto & i : vec) {
-        std::cout << i.getCode() << "\n";
-    }
+    std::cout << vec.size();
     return 0;
 }
