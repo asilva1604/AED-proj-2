@@ -46,7 +46,7 @@ public:
     //3.4
     size_t numberOfDifferentCountriesAirportFliesTo(const string &airportCode);
     size_t numberOfDifferentCountriesCityFliesTo(const string &city);
-    vector<Vertex *> getAirportsInCity(const string &city);
+    vector<std::shared_ptr<Vertex>> getAirportsInCity(const string &city);
 
     //3.5
     size_t numberOfCitiesFromAirport(const string &airportCode);

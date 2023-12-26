@@ -10,6 +10,7 @@
 #include <queue>
 #include <stack>
 #include <list>
+#include <memory>
 #include <algorithm>
 #include <unordered_set>
 #include "Airline.h"
@@ -31,8 +32,8 @@ class Vertex {
     int num;                      // auxiliary field
     int low;                      // auxiliary field
 
-    void addEdge(Vertex *dest, double w, const Airline &airline);
-    bool removeEdgeTo(Vertex *d);
+    void addEdge(std::shared_ptr<Vertex> dest, double w, const Airline &airline);
+    bool removeEdgeTo(std::shared_ptr<Vertex> d);
 
 public:
     Vertex(Airport in);
@@ -65,13 +66,13 @@ public:
 
 
 class Edge {
-    Vertex * dest;      // destination vertex
+    std::shared_ptr<Vertex> dest;      // destination vertex
     double weight;         // edge weight
     Airline airline_;
 public:
-    Edge(Vertex *d, double w, const Airline &airline);
-    Vertex *getDest() const;
-    void setDest(Vertex *dest);
+    Edge(std::shared_ptr<Vertex> d, double w, const Airline &airline);
+    std::shared_ptr<Vertex> getDest() const;
+    void setDest(std::shared_ptr<Vertex> dest);
     double getWeight() const;
     void setWeight(double weight);
     const Airline &getAirline() const;
@@ -80,22 +81,22 @@ public:
 };
 
 class Graph {
-    unordered_map<string, Vertex *> vertexSet;      // vertex set
+    unordered_map<string, std::shared_ptr<Vertex>> vertexSet;      // vertex set
     int _index_;                        // auxiliary field
     stack<Vertex> _stack_;           // auxiliary field
     list<list<Airport>> _list_sccs_;        // auxiliary field
     size_t edgeCount_ = 0;
 
-    void dfsVisit(Vertex *v,  vector<Airport> & res) const;
-    bool dfsIsDAG(Vertex *v) const;
+    void dfsVisit(std::shared_ptr<Vertex> v,  vector<Airport> & res) const;
+    bool dfsIsDAG(std::shared_ptr<Vertex> v) const;
 public:
-    Vertex *findVertex(const Airport &in) const;
+    std::shared_ptr<Vertex> findVertex(const Airport &in) const;
     int getNumVertex() const;
     bool addVertex(const Airport &in);
     bool removeVertex(const Airport &in);
     bool addEdge(const Airport &sourc, const Airport &dest, double w, const Airline &airline);
     bool removeEdge(const Airport &sourc, const Airport &dest);
-    unordered_map<string, Vertex *> getVertexSet() const;
+    unordered_map<string, std::shared_ptr<Vertex>> getVertexSet() const;
     vector<Airport> dfs() const;
     vector<Airport> dfs(const Airport & source) const;
     vector<Airport> bfs(const Airport &source) const;

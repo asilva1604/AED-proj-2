@@ -38,7 +38,7 @@ size_t Graph::getNumEdge() const{
 Vertex::Vertex(Airport in): info(in) {}
 
 
-Edge::Edge(Vertex *d, double w, const Airline &airline): dest(d), weight(w), airline_(airline) {}
+Edge::Edge(std::shared_ptr<Vertex> d, double w, const Airline &airline): dest(d), weight(w), airline_(airline) {}
 
 
 
@@ -47,7 +47,7 @@ int Graph::getNumVertex() const {
 }
 
 
-unordered_map<string, Vertex *> Graph::getVertexSet() const {
+unordered_map<string, std::shared_ptr<Vertex>> Graph::getVertexSet() const {
     return vertexSet;
 }
 
@@ -72,12 +72,12 @@ void Vertex::setProcessing(bool p) {
 }
 
 
-Vertex *Edge::getDest() const {
+std::shared_ptr<Vertex> Edge::getDest() const {
     return dest;
 }
 
 
-void Edge::setDest(Vertex *d) {
+void Edge::setDest(std::shared_ptr<Vertex> d) {
     Edge::dest = d;
 }
 
@@ -95,7 +95,7 @@ void Edge::setWeight(double weight) {
  * Auxiliary function to find a vertex with a given content.
  */
 
-Vertex * Graph::findVertex(const Airport &in) const {
+std::shared_ptr<Vertex> Graph::findVertex(const Airport &in) const {
     auto it = vertexSet.find(in.getCode());
     if (it == vertexSet.end()) return NULL;
     return it->second;
@@ -160,7 +160,7 @@ void Vertex::setAdj(const vector<Edge> &adj) {
 bool Graph::addVertex(const Airport &in) {
     if ( findVertex(in) != NULL)
         return false;
-    vertexSet.insert({in.getCode(), new Vertex(in)});
+    vertexSet.insert({in.getCode(), std::make_shared<Vertex>(in)});
     return true;
 }
 
@@ -186,7 +186,7 @@ bool Graph::addEdge(const Airport &sourc, const Airport &dest, double w, const A
  * with a given destination vertex (d) and edge weight (w).
  */
 
-void Vertex::addEdge(Vertex *d, double w, const Airline &airline) {
+void Vertex::addEdge(std::shared_ptr<Vertex> d, double w, const Airline &airline) {
     adj.push_back(Edge(d, w, airline));
 }
 
@@ -211,7 +211,7 @@ bool Graph::removeEdge(const Airport &sourc, const Airport &dest) {
  * Returns true if successful, and false if such edge does not exist.
  */
 
-bool Vertex::removeEdgeTo(Vertex *d) {
+bool Vertex::removeEdgeTo(std::shared_ptr<Vertex> d) {
     for (auto it = adj.begin(); it != adj.end(); it++)
         if (it->dest  == d) {
             adj.erase(it);
@@ -237,7 +237,6 @@ bool Graph::removeVertex(const Airport &in) {
     vertexSet.erase(it);
     for (auto u : vertexSet)
         u.second->removeEdgeTo(v);
-    delete v;
     return true;
 }
 
@@ -264,7 +263,7 @@ vector<Airport> Graph::dfs() const {
  * Updates a parameter with the list of visited node contents.
  */
 
-void Graph::dfsVisit(Vertex *v, vector<Airport> & res) const {
+void Graph::dfsVisit(std::shared_ptr<Vertex> v, vector<Airport> & res) const {
     v->visited = true;
     res.push_back(v->info);
     for (auto & e : v->adj) {
@@ -308,7 +307,7 @@ vector<Airport> Graph::bfs(const Airport & source) const {
     auto s = findVertex(source);
     if (s == NULL)
         return res;
-    queue<Vertex *> q;
+    queue<std::shared_ptr<Vertex>> q;
     for (auto v : vertexSet)
         v.second->visited = false;
     q.push(s);
@@ -342,7 +341,7 @@ vector<Airport> Graph::bfsWithSteps(const Airport & source, int step) const {
     auto s = findVertex(source);
     if (s == NULL)
         return res;
-    queue<Vertex *> q;
+    queue<std::shared_ptr<Vertex>> q;
     for (auto v : vertexSet)
         v.second->visited = false;
     q.push(s);
@@ -382,7 +381,7 @@ vector<Airport> Graph::bfsFurthestVertices(const Airport & source) const {
     auto s = findVertex(source);
     if (s == NULL)
         return res;
-    queue<Vertex *> q;
+    queue<std::shared_ptr<Vertex>> q;
     for (auto v : vertexSet)
         v.second->visited = false;
     q.push(s);
@@ -437,7 +436,7 @@ bool Graph::isDAG() const {
  * Returns false (not acyclic) if an edge to a vertex in the stack is found.
  */
 
-bool Graph::dfsIsDAG(Vertex *v) const {
+bool Graph::dfsIsDAG(std::shared_ptr<Vertex> v) const {
     v->visited = true;
     v->processing = true;
     for (auto & e : v->adj) {
@@ -466,7 +465,7 @@ bool Graph::dfsIsDAG(Vertex *v) const {
  */
 
 
-void topSortHelper(Vertex *v, vector<Airport> &res) {
+void topSortHelper(std::shared_ptr<Vertex> v, vector<Airport> &res) {
     v->setVisited(true);
     for (const Edge &e : v->getAdj()) {
         auto dest = e.getDest();
