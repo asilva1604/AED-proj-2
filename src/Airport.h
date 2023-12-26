@@ -7,6 +7,7 @@
 
 #include <string>
 #include <iostream>
+#include "Graph.h"
 
 class Airport {
     std::string code_;
@@ -16,6 +17,8 @@ class Airport {
     std::string latitude_;
     std::string longitude_;
     std::wstring wcode_;
+
+    size_t trafficCapacity_ = 0;
 
 public:
     Airport(const std::string &code, const std::string &name, const std::string &city, const std::string &country,
@@ -31,6 +34,11 @@ public:
     const std::wstring &getWcode() const;
 
     bool operator<(const Airport &obj) const;
+
+    void setTrafficCapacity(size_t capacity);
+
+    size_t getTrafficCapacity() const;
+
 };
 
 

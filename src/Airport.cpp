@@ -45,4 +45,12 @@ bool Airport::operator<(const Airport &obj) const{
     return this->code_<obj.code_;
 }
 
+void Airport::setTrafficCapacity(size_t capacity) {
+    trafficCapacity_ = capacity;
+}
+
+size_t Airport::getTrafficCapacity() const {
+    return trafficCapacity_;
+}
+
 Airport::Airport() = default;

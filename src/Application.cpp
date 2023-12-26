@@ -33,8 +33,15 @@ Application::Application()
         Airport destinationAirport = getAirport(destinationAirportCode);
         Airline airline = getAirline(airlineCode);
 
+        auto source = flightNetwork_->findVertex(sourceAirport);
+        auto dest = flightNetwork_->findVertex(destinationAirport);
+
+        source->getInfo().setTrafficCapacity(source->getInfo().getTrafficCapacity()+1);
+        dest->getInfo().setTrafficCapacity(dest->getInfo().getTrafficCapacity()+1);
+
         flightNetwork_->addEdge(sourceAirport, destinationAirport, 0, airline);
     }
+
 }
 
 Airport Application::getAirport(const std::string &code) const {
@@ -270,4 +277,20 @@ size_t Application::numberOfCountriesFromAirport(const string &airportCode) {
     }
 
     return cities.size();
+}
+
+std::vector<Airport> Application::airportsWithGreatestTrafficCapacity(size_t k) {
+    auto copy(flightNetwork_->getVertexSet());
+
+    std::sort(copy.begin(), copy.end(), [](Vertex<Airport> *obj1, Vertex<Airport> *obj2) {
+        return obj1->getInfo().getTrafficCapacity() > obj2->getInfo().getTrafficCapacity();
+    });
+
+    std::vector<Airport> res;
+
+    for (size_t i = 0; i < k; i++) {
+        res.push_back(copy.at(i)->getInfo());
+    }
+
+    return res;
 }

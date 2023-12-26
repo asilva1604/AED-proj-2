@@ -39,7 +39,7 @@ class Vertex {
     bool removeEdgeTo(Vertex<T> *d);
 public:
     Vertex(T in);
-    T getInfo() const;
+    T &getInfo();
     void setInfo(T in);
     bool isVisited() const;
     void setVisited(bool v);
@@ -153,7 +153,7 @@ vector<Vertex<T> * > Graph<T>::getVertexSet() const {
 }
 
 template<class T>
-T Vertex<T>::getInfo() const {
+T &Vertex<T>::getInfo() {
     return info;
 }
 
