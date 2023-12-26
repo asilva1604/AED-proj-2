@@ -28,6 +28,8 @@ public:
     Airline getAirline(const std::string &code) const;
     const Graph &getGraph();
     const std::vector<Airport> &getAirports();
+
+    //3.1
     size_t getAirportCount();
     size_t getFlightCount();
 

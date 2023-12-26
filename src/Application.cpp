@@ -205,6 +205,7 @@ size_t Application::numberOfCitiesFromAirport(const std::string &airportCode){
 }
 
 size_t Application::numberOfAirportsFromAirportWithStops(const std::string &airportCode, int stops){
+    ++stops;
     auto airportObj = getAirport(airportCode);
     auto *airport = flightNetwork_->findVertex(airportObj);
 
@@ -212,6 +213,7 @@ size_t Application::numberOfAirportsFromAirportWithStops(const std::string &airp
 }
 
 size_t Application::numberOfCitiesFromAirportWithStops(const std::string &airportCode, int stops){
+    ++stops;
     auto airportObj = getAirport(airportCode);
     auto *airport = flightNetwork_->findVertex(airportObj);
 
@@ -228,6 +230,7 @@ size_t Application::numberOfCitiesFromAirportWithStops(const std::string &airpor
 }
 
 size_t Application::numberOfCountriesFromAirportWithStops(const std::string &airportCode, int stops){
+    ++stops;
     auto airportObj = getAirport(airportCode);
     auto *airport = flightNetwork_->findVertex(airportObj);
 

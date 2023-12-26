@@ -6,8 +6,6 @@ int main() {
     //anInterface.run();
     Application app;
 
-    auto vec = app.essentialAirports();
-
-    std::cout << vec.size();
+    std::cout << app.getAirportCount() << "\n" << app.numberOfAirportsFromAirportWithStops("OPO", 0);
     return 0;
 }
