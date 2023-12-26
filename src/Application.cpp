@@ -3,11 +3,12 @@
 //
 
 #include "Application.h"
+#include <chrono>
 
 Application::Application()
         : airports_(std::make_unique<std::vector<Airport>>()),
           airlines_(std::make_unique<std::vector<Airline>>()),
-          flightNetwork_(std::make_unique<Graph<Airport>>())
+          flightNetwork_(std::make_unique<Graph>())
 {
     FileReader airlineData("../dataset/airlines.csv");
     FileReader airportsData("../dataset/airports.csv");
@@ -24,6 +25,7 @@ Application::Application()
         flightNetwork_->addVertex(airport);
     }
 
+    auto start = std::chrono::high_resolution_clock::now();
     for (const auto &line : flightsData.getData()) {
         auto sourceAirportCode = line.at(0);
         auto destinationAirportCode = line.at(1);
@@ -41,6 +43,9 @@ Application::Application()
 
         flightNetwork_->addEdge(sourceAirport, destinationAirport, 0, airline);
     }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    std::cout << duration.count() << "\n";
 
 }
 
@@ -62,7 +67,7 @@ Airline Application::getAirline(const std::string &code) const {
     return Airline();
 }
 
-const Graph<Airport> &Application::getGraph() {
+const Graph &Application::getGraph() {
     return *flightNetwork_;
 }
 
@@ -92,14 +97,14 @@ size_t Application::airlinesOutboundOfAirport(const std::string &airportCode) {
     return airport->getNumDifferentAirlines();
 }
 
-std::vector<Vertex<Airport> *> Application::getAirportsInCity(const std::string &city){
+std::vector<Vertex *> Application::getAirportsInCity(const std::string &city){
     auto vertexVector = flightNetwork_->getVertexSet();
 
-    std::vector<Vertex<Airport> *> airportsInCity;
+    std::vector<Vertex *> airportsInCity;
 
-    for (Vertex<Airport> *vertex : vertexVector) {
-        if (vertex->getInfo().getCity() == city) {
-            airportsInCity.push_back(vertex);
+    for (auto p : vertexVector) {
+        if (p.second->getInfo().getCity() == city) {
+            airportsInCity.push_back(p.second);
         }
     }
 
@@ -108,11 +113,11 @@ std::vector<Vertex<Airport> *> Application::getAirportsInCity(const std::string 
 
 size_t Application::outboundFlightsPerCity(const std::string &city) {
 
-    std::vector<Vertex<Airport> *> airportsInCity = getAirportsInCity(city);
+    std::vector<Vertex *> airportsInCity = getAirportsInCity(city);
 
     size_t res = 0;
 
-    for (const Vertex<Airport> *vertex : airportsInCity) {
+    for (const Vertex *vertex : airportsInCity) {
         res += vertex->getAdj().size();
     }
 
@@ -124,10 +129,10 @@ size_t Application::inboundFlightsPerCity(const std::string &city) {
 
     size_t res = 0;
 
-    for (Vertex<Airport> *vertex : vertexVector) {
-        if (vertex->getInfo().getCity() == city) continue;
+    for (auto p : vertexVector) {
+        if (p.second->getInfo().getCity() == city) continue;
 
-        for (const Edge<Airport> &e : vertex->getAdj()) {
+        for (const Edge &e : p.second->getAdj()) {
             if (e.getDest()->getInfo().getCity() == city) ++res;
         }
     }
@@ -142,8 +147,8 @@ size_t Application::flightsPerAirline(const std::string &airlineCode) {
     size_t res = 0;
     auto vertexVector = flightNetwork_->getVertexSet();
 
-    for (Vertex<Airport> *vertex : vertexVector) {
-        for (const Edge<Airport> &edge : vertex->getAdj()) {
+    for (auto p : vertexVector) {
+        for (const Edge &edge : p.second->getAdj()) {
             if (edge.getAirline().getCode() == airlineCode) ++res;
         }
     }
@@ -159,7 +164,7 @@ size_t Application::numberOfDifferentCountriesAirportFliesTo(const std::string &
 
     size_t res = 0;
 
-    for (const Edge<Airport>& destinyAirports : airport->getAdj()){
+    for (const Edge& destinyAirports : airport->getAdj()){
         countries.insert(destinyAirports.getDest()->getInfo().getCountry());
     }
 
@@ -169,14 +174,14 @@ size_t Application::numberOfDifferentCountriesAirportFliesTo(const std::string &
 }
 
 size_t Application::numberOfDifferentCountriesCityFliesTo(const std::string &city){
-    std::vector<Vertex<Airport> *> airportsInCity = getAirportsInCity(city);
+    std::vector<Vertex *> airportsInCity = getAirportsInCity(city);
 
     unordered_set<std::string> countries;
 
     size_t res = 0;
 
-    for (const Vertex<Airport> *airport : airportsInCity) {
-        for (const Edge<Airport>& destinyAirports : airport->getAdj()){
+    for (const Vertex *airport : airportsInCity) {
+        for (const Edge& destinyAirports : airport->getAdj()){
             countries.insert(destinyAirports.getDest()->getInfo().getCountry());
         }
     }
@@ -192,7 +197,7 @@ size_t Application::numberOfCitiesFromAirport(const std::string &airportCode){
 
     unordered_set<std::string> cities;
 
-    for (const Edge<Airport>& edge : airport->getAdj()){
+    for (const Edge& edge : airport->getAdj()){
         cities.insert(edge.getDest()->getInfo().getCity());
     }
 
@@ -212,7 +217,7 @@ size_t Application::numberOfCitiesFromAirportWithStops(const std::string &airpor
 
     unordered_set<std::string> cities;
 
-    std::vector<Airport> airportsInRange = flightNetwork_->bfsWithSteps(airport->getInfo(), stops);
+    std::vector airportsInRange = flightNetwork_->bfsWithSteps(airport->getInfo(), stops);
     airportsInRange.erase(airportsInRange.begin());
 
     for (const Airport& airport1 : airportsInRange){
@@ -228,7 +233,7 @@ size_t Application::numberOfCountriesFromAirportWithStops(const std::string &air
 
     unordered_set<std::string> countries;
 
-    std::vector<Airport> airportsInRange = flightNetwork_->bfsWithSteps(airport->getInfo(), stops);
+    std::vector airportsInRange = flightNetwork_->bfsWithSteps(airport->getInfo(), stops);
     airportsInRange.erase(airportsInRange.begin());
 
     for (const Airport& airport1 : airportsInRange){
@@ -242,7 +247,7 @@ std::vector<std::pair<std::string, std::string>> Application::tripsWithGreatestN
     auto airportObj = getAirport(airportCode);
     auto *airport = flightNetwork_->findVertex(airportObj);
 
-    std::vector<Airport> mostStops = flightNetwork_->bfsFurthestVertices(airport->getInfo());
+    std::vector mostStops = flightNetwork_->bfsFurthestVertices(airport->getInfo());
     std::vector<std::pair<std::string, std::string>> trips;
 
     for (const Airport& dest_airport : mostStops){
@@ -259,7 +264,7 @@ size_t Application::numberOfAirportsFromAirport(const string &airportCode) {
 
     std::set<Airport> airports;
 
-    for (const Edge<Airport>& edge : airport->getAdj()){
+    for (const Edge& edge : airport->getAdj()){
         airports.insert(edge.getDest()->getInfo());
     }
 
@@ -272,7 +277,7 @@ size_t Application::numberOfCountriesFromAirport(const string &airportCode) {
 
     std::set<std::string> cities;
 
-    for (const Edge<Airport>& edge : airport->getAdj()){
+    for (const Edge& edge : airport->getAdj()){
         cities.insert(edge.getDest()->getInfo().getCity());
     }
 
@@ -280,9 +285,12 @@ size_t Application::numberOfCountriesFromAirport(const string &airportCode) {
 }
 
 std::vector<Airport> Application::airportsWithGreatestTrafficCapacity(size_t k) const{
-    auto copy(flightNetwork_->getVertexSet());
+    auto copyMap(flightNetwork_->getVertexSet());
+    vector<Vertex *> copy;
 
-    std::sort(copy.begin(), copy.end(), [](Vertex<Airport> *obj1, Vertex<Airport> *obj2) {
+    for (auto p : copyMap) copy.push_back(p.second);
+
+    std::sort(copy.begin(), copy.end(), [](Vertex *obj1, Vertex *obj2) {
         return obj1->getInfo().getTrafficCapacity() > obj2->getInfo().getTrafficCapacity();
     });
 
@@ -295,7 +303,7 @@ std::vector<Airport> Application::airportsWithGreatestTrafficCapacity(size_t k) 
     return res;
 }
 
-void dfsArt(Vertex<Airport> *v, int &index, std::set<Airport> &articulationPoints) {
+void dfsArt(Vertex *v, int &index, std::set<Airport> &articulationPoints) {
     v->setVisited(true);
     v->setNum(index);
     v->setLow(index);
@@ -330,13 +338,13 @@ std::set<Airport> Application::findArticulationPoints() const{
     int index = 0;
 
     for (auto &v : flightNetwork_->getVertexSet()) {
-        v->setVisited(false);
-        v->setNum(0);
+        v.second->setVisited(false);
+        v.second->setNum(0);
     }
 
     for (auto &v : flightNetwork_->getVertexSet()) {
-        if (!v->isVisited()) {
-            dfsArt(v, index, articulationPoints);
+        if (!v.second->isVisited()) {
+            dfsArt(v.second, index, articulationPoints);
         }
     }
 
@@ -344,7 +352,7 @@ std::set<Airport> Application::findArticulationPoints() const{
 }
 
 std::set<Airport> Application::essentialAirports() const {
-    std::set<Airport> res = findArticulationPoints();
+    std::set res = findArticulationPoints();
     return res;
 }
 

@@ -7,7 +7,6 @@
 
 #include <string>
 #include <iostream>
-#include "Graph.h"
 
 class Airport {
     std::string code_;
@@ -25,7 +24,7 @@ public:
             const std::string &latitude, const std::string &longitude);
     Airport();
     const std::string &getCode() const;
-    bool operator==(const Airport &other);
+    bool operator==(const Airport &other) const;
     friend std::ostream& operator<<(std::ostream &stream, const Airport &airport);
     const std::string &getCity() const;
 

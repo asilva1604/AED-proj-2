@@ -17,4 +17,5 @@ add_executable(AED_proj_2 src/main.cpp
         src/Interface.h
         src/Printer.h
         src/Util.h
+        src/Graph.cpp
 )

@@ -23,7 +23,7 @@ const std::wstring &Airport::getWcode() const {
     return wcode_;
 }
 
-bool Airport::operator==(const Airport &other) {
+bool Airport::operator==(const Airport &other) const{
     if (other.getCode() == code_) return true;
     return false;
 }
