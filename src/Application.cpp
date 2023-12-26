@@ -287,6 +287,13 @@ size_t Application::numberOfCountriesFromAirport(const string &airportCode) {
     return cities.size();
 }
 
+struct CompareTrafficCapacity {
+    bool operator()(Vertex* v1, Vertex* v2) const {
+        // Compare based on traffic capacity
+        return v1->getInfo().getTrafficCapacity() < v2->getInfo().getTrafficCapacity();
+    }
+};
+
 std::vector<Airport> Application::airportsWithGreatestTrafficCapacity(size_t k) const{
     auto copyMap(flightNetwork_->getVertexSet());
     vector<Vertex *> copy;
@@ -358,5 +365,4 @@ std::set<Airport> Application::essentialAirports() const {
     std::set res = findArticulationPoints();
     return res;
 }
-
 

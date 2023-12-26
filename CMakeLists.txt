@@ -3,6 +3,9 @@ project(AED_proj_2)
 
 set(CMAKE_CXX_STANDARD 17)
 
+# Enable AddressSanitizer
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+
 add_executable(AED_proj_2 src/main.cpp
         src/Application.cpp
         src/Application.h

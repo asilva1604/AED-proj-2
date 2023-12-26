@@ -6,6 +6,14 @@ int main() {
     //anInterface.run();
     Application app;
 
-    std::cout << app.getAirportCount() << "\n" << app.numberOfAirportsFromAirportWithStops("OPO", 0);
+    auto start = std::chrono::high_resolution_clock::now();
+    auto vec = app.airportsWithGreatestTrafficCapacity(10);
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    std::cout << duration.count() << "\n";
+
+    for (const auto & p : vec)  {
+        std::cout << p.getCode();
+    }
     return 0;
 }
