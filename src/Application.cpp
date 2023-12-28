@@ -231,7 +231,7 @@ size_t Application::numberOfCountriesFromAirportWithStops(const std::string &air
     return countries.size();
 }
 
-std::vector<std::pair<std::string, std::string>> Application::tripsWithGreatestNumberOfStops(const std::string &airportCode){
+std::vector<std::pair<std::string, std::string>> Application::tripsWithGreatestNumberOfStopsFromAirport(const std::string &airportCode){
     auto airportObj = getAirport(airportCode);
     auto *airport = flightNetwork_->findVertex(airportObj);
 

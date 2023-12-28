@@ -62,6 +62,11 @@ std::vector<std::vector<std::wstring>> loadingDataAnimation = {
                 L"█   ████  ██  ███  ███ ██  █ ███ ████    ███   ██  ███  ██              ",
                 L"█   █  █ █__█ █  █  █  █ █ █  █  █  _    █  █ █__█  █  █__█             ",
                 L"███ ████ █  █ ███  ███ █  ██ ███ ████    ███  █  █  █  █  █   █  █  █  █",
+        },
+        {
+                L"█   ████  ██  ███  ███ ██  █ ███ ████    ███   ██  ███  ██              ",
+                L"█   █  █ █__█ █  █  █  █ █ █  █  █  _    █  █ █__█  █  █__█             ",
+                L"███ ████ █  █ ███  ███ █  ██ ███ ████    ███  █  █  █  █  █   █  █  █  █",
         }
 };
 
@@ -71,12 +76,22 @@ int space_size_increaser = 8;
 
 int frame = 0;
 
+
+std::wstring centerUp(const std::wstring& txtToCenter){
+    if (getTerminalWidth() / 2 - txtToCenter.size() / 2 > 0){
+        return std::wstring(getTerminalWidth() / 2 - txtToCenter.size() / 2, L' ') + txtToCenter;
+
+    }
+    return txtToCenter;
+}
+
+
 void printAnimatedAirplane(const std::vector<std::wstring>& draw, int sleep){
     std::this_thread::sleep_for(std::chrono::milliseconds(sleep));
     system("clear");
     for (const std::wstring& title_segment : draw){
         if (getTerminalWidth() - space_size_for_animation + draw[0].size() <= draw[0].size()) {
-            std::wcout << wstring(space_size_for_animation - draw[0].size(), L' ');
+            std::wcout << std::wstring(space_size_for_animation - draw[0].size(), L' ');
             std::wcout << bold << title_segment.substr(0, getTerminalWidth() + draw[0].size() - space_size_for_animation)
             << end_effect << std::endl;
         }
@@ -103,16 +118,15 @@ void printBoldTitle(const std::vector<std::wstring>& title){
     }
 }
 
-void printTitle(const std::vector<std::wstring>& title, size_t spaces = 0){
+void printCenteredTitle(const std::vector<std::wstring>& title){
     for (const std::wstring& title_segment : title){
-        std::wcout << wstring(spaces, L' ');
-        std::wcout << bold << title_segment << end_effect << std::endl;
+        std::wcout << bold << centerUp(title_segment) << end_effect << std::endl;
     }
 }
 
 void printTextLoadingData(){
     std::wcout << L"\n\n\n" << std::endl;
-    printTitle(loadingDataAnimation[frame], getTerminalWidth()/2 - loadingDataAnimation[0][0].size() / 2);
+    printCenteredTitle(loadingDataAnimation[frame]);
     frame ++;
     if (frame > loadingDataAnimation.size() - 1){frame = 0;}
 }
@@ -137,5 +151,28 @@ void printHelper(std::vector<std::wstring> helpers, const std::vector<int>& sele
 
 void printMaximizeWarning(){
     std::wstring maximize_string = L" PLease maximize your window for a better experience!";
-    std::wcout << L"\n" << wstring(getTerminalWidth() / 2 - maximize_string.length() / 2, L' ') << maximize_string << std::endl;
+    std::wcout << L"\n" << centerUp(maximize_string) << std::endl;
+}
+
+void printDirectory(const std::wstring& directory) {
+    std::wcout << bold << L" --";
+    for (wchar_t c : directory){
+        std::wcout << L"-";
+    }
+    std::wcout << L"\n| " << directory << L" |" << std::endl;
+    std::wcout << L" --";
+    for (wchar_t c : directory){
+        std::wcout << L"-";
+    }
+    std::wcout << end_effect << L"\n\n\n";
+}
+
+void printMonoinformation(const std::wstring& wstr){
+    std::wstring wigly_underline;
+    std::wcout << L"\n\n\n" << std::endl;
+    std::wcout << centerUp(L"-> "  + wstr +  L" <-") << std::endl;
+    for (wchar_t c : wstr){
+        wigly_underline.push_back(L'~');
+    }
+    std::wcout << L" " << centerUp(red + wigly_underline + end_effect) << std::endl;
 }
