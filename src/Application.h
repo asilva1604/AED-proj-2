@@ -71,7 +71,7 @@ public:
     std::set<Airport> findArticulationPoints() const;
 
     //4.1
-    std::vector<std::vector<Airport>> bestFlightAirportToAirport(const std::string &airport1,
+    std::vector<std::vector<std::pair<Airport, Airline>>> bestFlightAirportToAirport(const std::string &airport1,
                                                                                    const std::string &airport2);
 };
 

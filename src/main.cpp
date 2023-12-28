@@ -8,9 +8,9 @@ int main() {/*
     Application app;
 
     auto start = std::chrono::high_resolution_clock::now();
-    for (const auto &trip : app.bestFlightAirportToAirport("YBX", "SRV")){
-        for (const auto &airport : trip) {
-            std::cout << airport.getCode() << "||";
+    for (const auto &trip : app.bestFlightAirportToAirport("OPO", "LIS")){
+        for (const auto &flight : trip) {
+            std::cout << flight.first << " " << flight.second.getCode() << "||";
         }
         std::cout << std::endl;
     }

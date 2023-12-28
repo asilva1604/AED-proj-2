@@ -377,7 +377,7 @@ std::set<Airport> Application::essentialAirports() const {
     return res;
 }
 
-std::vector<std::vector<Airport>>
+std::vector<std::vector<std::pair<Airport, Airline>>>
 Application::bestFlightAirportToAirport(const string &airport1, const string &airport2) {
     //TODO: MAYBE CREATE FLIGHT CLASS THAT HAS SOURCE, DEST, AND FLIGHT
     Airport airport1Obj;
