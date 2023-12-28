@@ -23,6 +23,7 @@ public:
     Airport(const std::string &code, const std::string &name, const std::string &city, const std::string &country,
             const std::string &latitude, const std::string &longitude);
     Airport();
+    Airport(const std::string &code); //dummy constructor
     const std::string &getCode() const;
     bool operator==(const Airport &other) const;
     friend std::ostream& operator<<(std::ostream &stream, const Airport &airport);
@@ -37,6 +38,8 @@ public:
     void setTrafficCapacity(size_t capacity);
 
     size_t getTrafficCapacity() const;
+
+    const std::string &getName() const;
 
 };
 

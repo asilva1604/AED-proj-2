@@ -377,3 +377,52 @@ std::set<Airport> Application::essentialAirports() const {
     return res;
 }
 
+std::vector<std::vector<std::pair<Airport, Airline>>>
+Application::bestFlightAirportToAirport(const string &airport1, const string &airport2) {
+    //TODO: MAYBE CREATE FLIGHT CLASS THAT HAS SOURCE, DEST, AND FLIGHT
+    Airport airport1Obj;
+    Airport airport2Obj;
+    if (airport1.length() == 3) {
+        auto airportObj = getAirport(airport1);
+        airport1Obj = airportObj;
+    } else {
+        auto airportObj = getAirportByName(airport1);
+        airport1Obj = airportObj;
+    }
+
+    if (airport2.length() == 3) {
+        auto airportObj = getAirport(airport2);
+        airport2Obj = airportObj;
+    } else {
+        auto airportObj = getAirportByName(airport2);
+        airport2Obj = airportObj;
+    }
+    auto vec = flightNetwork_->bfsShortestPath(airport1Obj, airport2Obj);
+
+    return vec;
+}
+
+Airport Application::getAirportByName(const string &name) const {
+    for (const auto &airport : *airports_) {
+        if (airport.getName() == name) {
+            return airport;
+        }
+    }
+    return {};
+}
+
+std::vector<std::string>
+Application::airlinesAvailableForFlight(const Airport &source, const Airport &destination) const {
+    auto sourceVertex = flightNetwork_->findVertex(source);
+
+    std::vector<std::string> res;
+
+    for (const auto &e : sourceVertex->getAdj()) {
+        if (e.getDest()->getInfo() == destination) {
+            res.push_back(e.getAirline().getCode());
+        }
+    }
+
+    return res;
+}
+
