@@ -603,3 +603,56 @@ Application::bestFlightLocationToCity(const long double &latitude, const long do
     return res;
 }
 
+std::vector<std::vector<Airport>>
+Application::bestFlightLocationToLocation(const long double &sourceLatitude, const long double &sourceLongitude,
+                                          const long double &destLatitude, const long double &destLongitude,
+                                          const vector<std::string> &forbidden) {
+    return std::vector<std::vector<Airport>>();
+}
+
+std::vector<std::vector<Airport>>
+Application::bestFlightAirportToAirport(const string &airport1, const string &airport2,
+                                        const std::vector<std::string> &forbidden) {
+    return std::vector<std::vector<Airport>>();
+}
+
+std::vector<std::vector<Airport>> Application::bestFlightAirportToCity(const string &airport, const string &city,
+                                                                       const std::vector<std::string> &forbidden) {
+    return std::vector<std::vector<Airport>>();
+}
+
+std::vector<std::vector<Airport>>
+Application::bestFlightAirportToLocation(const string &airport, const long double &latitude,
+                                         const long double &longitude, const std::vector<std::string> &forbidden) {
+    return std::vector<std::vector<Airport>>();
+}
+
+std::vector<std::vector<Airport>>
+Application::bestFlightCityToCity(const string &sourceCity, const string &destinationCity,
+                                  const std::vector<std::string> &forbidden) {
+    return std::vector<std::vector<Airport>>();
+}
+
+std::vector<std::vector<Airport>> Application::bestFlightCityToAirport(const string &city, const std::string airport,
+                                                                       const std::vector<std::string> &forbidden) {
+    return std::vector<std::vector<Airport>>();
+}
+
+std::vector<std::vector<Airport>>
+Application::bestFlightCityToLocation(const string &city, const long double &latitude, const long double &longitude,
+                                      const std::vector<std::string> &forbidden) {
+    return std::vector<std::vector<Airport>>();
+}
+
+std::vector<std::vector<Airport>>
+Application::bestFlightLocationToAirport(const long double &latitude, const long double &longitude,
+                                         const string &airport, const vector<std::string> &forbidden) {
+    return std::vector<std::vector<Airport>>();
+}
+
+std::vector<std::vector<Airport>>
+Application::bestFlightLocationToCity(const long double &latitude, const long double &longitude, const string &city,
+                                      const vector<std::string> &forbidden) {
+    return std::vector<std::vector<Airport>>();
+}
+

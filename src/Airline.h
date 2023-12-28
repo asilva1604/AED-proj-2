@@ -16,6 +16,7 @@ public:
     Airline(const std::string &code, const std::string &name, const std::string &callsign, const std::string &country);
     const std::string &getCode() const;
     Airline();
+    bool operator==(const Airline &other) const;
 };
 
 

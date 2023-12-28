@@ -16,4 +16,8 @@ const std::string &Airline::getCode() const {
     return code_;
 }
 
+bool Airline::operator==(const Airline &other) const{
+    return other.getCode() == code_;
+}
+
 Airline::Airline() = default;

@@ -73,32 +73,67 @@ public:
 
     //4.1
     std::vector<std::vector<Airport>> bestFlightAirportToAirport(const std::string &airport1,
-                                                                                   const std::string &airport2);
+                                                                 const std::string &airport2,
+                                                                 const std::vector<std::string> &forbidden);
     std::vector<std::vector<Airport>> bestFlightAirportToCity(const std::string &airport,
-                                                                                  const std::string &city);
+                                                              const std::string &city,
+                                                              const std::vector<std::string> &forbidden);
     std::vector<std::vector<Airport>> bestFlightAirportToLocation(const std::string &airport,
-                                                                                      const long double &latitude,
-                                                                                      const long double &longitude);
+                                                                  const long double &latitude,
+                                                                  const long double &longitude,
+                                                                  const std::vector<std::string> &forbidden);
+    std::vector<std::vector<Airport>> bestFlightAirportToAirport(const std::string &airport1,
+                                                                 const std::string &airport2);
+    std::vector<std::vector<Airport>> bestFlightAirportToCity(const std::string &airport,
+                                                              const std::string &city);
+    std::vector<std::vector<Airport>> bestFlightAirportToLocation(const std::string &airport,
+                                                                  const long double &latitude,
+                                                                  const long double &longitude);
+
     //4.2
     std::vector<std::vector<Airport>> bestFlightCityToCity(const std::string &sourceCity,
-                                                                               const std::string &destinationCity);
+                                                           const std::string &destinationCity,
+                                                           const std::vector<std::string> &forbidden);
     std::vector<std::vector<Airport>> bestFlightCityToAirport(const std::string &city,
-                                                                                  const std::string airport);
+                                                              const std::string airport,
+                                                              const std::vector<std::string> &forbidden);
     std::vector<std::vector<Airport>> bestFlightCityToLocation(const std::string &city,
-                                                                                      const long double &latitude,
-                                                                                      const long double &longitude);
+                                                               const long double &latitude,
+                                                               const long double &longitude,
+                                                               const std::vector<std::string> &forbidden);
+    std::vector<std::vector<Airport>> bestFlightCityToCity(const std::string &sourceCity,
+                                                           const std::string &destinationCity);
+    std::vector<std::vector<Airport>> bestFlightCityToAirport(const std::string &city,
+                                                              const std::string airport);
+    std::vector<std::vector<Airport>> bestFlightCityToLocation(const std::string &city,
+                                                               const long double &latitude,
+                                                               const long double &longitude);
 
     //4.3
     std::vector<std::vector<Airport>> bestFlightLocationToLocation(const long double &sourceLatitude,
-                                                                                       const long double &sourceLongitude,
-                                                                                       const long double &destLatitude,
-                                                                                       const long double &destLongitude);
+                                                                   const long double &sourceLongitude,
+                                                                   const long double &destLatitude,
+                                                                   const long double &destLongitude,
+                                                                   const std::vector<std::string> &forbidden);
     std::vector<std::vector<Airport>> bestFlightLocationToAirport(const long double &latitude,
-                                                                                      const long double &longitude,
-                                                                                      const std::string &airport);
+                                                                  const long double &longitude,
+                                                                  const std::string &airport,
+                                                                  const std::vector<std::string> &forbidden);
     std::vector<std::vector<Airport>> bestFlightLocationToCity(const long double &latitude,
-                                                                                   const long double &longitude,
-                                                                                   const std::string &city);
+                                                               const long double &longitude,
+                                                               const std::string &city,
+                                                               const std::vector<std::string> &forbidden);
+    std::vector<std::vector<Airport>> bestFlightLocationToLocation(const long double &sourceLatitude,
+                                                                   const long double &sourceLongitude,
+                                                                   const long double &destLatitude,
+                                                                   const long double &destLongitude);
+    std::vector<std::vector<Airport>> bestFlightLocationToAirport(const long double &latitude,
+                                                                  const long double &longitude,
+                                                                  const std::string &airport);
+    std::vector<std::vector<Airport>> bestFlightLocationToCity(const long double &latitude,
+                                                               const long double &longitude,
+                                                               const std::string &city);
+
     std::vector<Airport> findAirportsNearLocation(const long double &latitude, const long double &longitude);
 
     std::vector<std::string> airlinesAvailableForFlight(const Airport &source, const Airport &destination) const;
