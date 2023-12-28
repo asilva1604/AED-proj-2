@@ -41,6 +41,7 @@ private:
     std::shared_ptr<Application> app;
 
     int location = 0;
+    int earlier_location = 0;
 
     unsigned int user_input;
 
@@ -51,14 +52,36 @@ private:
 
     std::thread appThread;
 
+    std::wstring directory;
+
     std::vector<std::vector<std::wstring>> options{
             {
                 L""
             },
             {
-                L"Nigga1",
-                L"Nigga2",
-                L"Nigga3"
+                L"Flights",
+                L"Statistics",
+                L"Quit"
+            },
+            {
+                L"Global Statistics",
+                L"Choose an Airport",
+                L"Choose a City",
+                L"Main Menu"
+            },
+            {
+                L"Number of Airports",
+                L"Number of Available Flights",
+                L"Back",
+                L"Main Menu"
+            },
+            {
+                L"Back",
+                L"Main Menu"
+            },
+            {
+                L"Back",
+                L"Main Menu"
             },
     };
 

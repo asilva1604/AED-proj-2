@@ -16,8 +16,7 @@ namespace std {
 
 size_t Vertex::getNumDifferentAirlines() {
     std::unordered_set<std::string> airlines;
-
-    for (const auto e : adj) {
+    for (const auto& e : adj) {
         airlines.insert(e.getAirline().getCode());
     }
 
@@ -375,9 +374,10 @@ vector<Airport> Graph::bfsWithSteps(const Airport & source, int step) const {
  * Returns a vector with the contents of the vertices by bfs order.
  */
 
-vector<Airport> Graph::bfsFurthestVertices(const Airport & source) const {
+vector<std::pair<Airport, int>> Graph::bfsFurthestVertices(const Airport & source) const {
     int count_level_elements = 0;
-    vector<Airport> res;
+    int count = 0;
+    vector<std::pair<Airport, int>> res;
     auto s = findVertex(source);
     if (s == NULL)
         return res;
@@ -389,7 +389,7 @@ vector<Airport> Graph::bfsFurthestVertices(const Airport & source) const {
     while (!q.empty()) {
         auto v = q.front();
         q.pop();
-        res.push_back(v->info);
+        res.emplace_back(v->info, count);
         for (auto &e: v->adj) {
             auto w = e.dest;
             if (!w->visited) {
@@ -401,6 +401,7 @@ vector<Airport> Graph::bfsFurthestVertices(const Airport & source) const {
         if (q.size() == count_level_elements) {
             if (count_level_elements != 0){
                 res.clear();
+                count ++;
             }
             count_level_elements = 0;
         }
