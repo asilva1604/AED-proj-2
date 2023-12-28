@@ -377,3 +377,36 @@ std::set<Airport> Application::essentialAirports() const {
     return res;
 }
 
+std::vector<std::vector<Airport>>
+Application::bestFlightAirportToAirport(const string &airport1, const string &airport2) {
+    Airport airport1Obj;
+    Airport airport2Obj;
+    if (airport1.length() == 3) {
+        auto airportObj = getAirport(airport1);
+        airport1Obj = airportObj;
+    } else {
+        auto airportObj = getAirportByName(airport1);
+        airport1Obj = airportObj;
+    }
+
+    if (airport2.length() == 3) {
+        auto airportObj = getAirport(airport2);
+        airport2Obj = airportObj;
+    } else {
+        auto airportObj = getAirportByName(airport2);
+        airport2Obj = airportObj;
+    }
+    auto vec = flightNetwork_->bfsShortestPath(airport1Obj, airport2Obj);
+
+    return vec;
+}
+
+Airport Application::getAirportByName(const string &name) const {
+    for (const auto &airport : *airports_) {
+        if (airport.getName() == name) {
+            return airport;
+        }
+    }
+    return {};
+}
+

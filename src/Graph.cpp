@@ -495,3 +495,63 @@ vector<Airport> Graph::topsort() const {
 
     return res;
 }
+
+vector<vector<Airport>> Graph::bfsShortestPath(const Airport &source, const Airport &destination) const {
+    // Resetting visited status
+    for (const auto &vertexPair : vertexSet) {
+        vertexPair.second->setVisited(false);
+    }
+
+    // Queue for BFS
+    queue<std::shared_ptr<Vertex>> vertexQueue;
+
+    // Map to store the path and number of stops for each airport
+    unordered_map<string, pair<string, int>> pathInfo;
+
+    // Start from the source vertex
+    auto sourceVertex = findVertex(source);
+    auto destVertex = findVertex(destination);
+
+    if (!sourceVertex || !destVertex) {
+        // Invalid source or destination
+        return vector<vector<Airport>>();
+    }
+
+    vertexQueue.push(sourceVertex);
+    sourceVertex->setVisited(true);
+    pathInfo[source.getCode()] = make_pair("", 0);
+
+    vector<vector<Airport>> resultPaths;
+
+    while (!vertexQueue.empty()) {
+        auto currentVertex = vertexQueue.front();
+        vertexQueue.pop();
+
+        for (const auto &edge : currentVertex->getAdj()) {
+            auto neighborVertex = edge.getDest();
+
+            if (!neighborVertex->isVisited()) {
+                neighborVertex->setVisited(true);
+                vertexQueue.push(neighborVertex);
+
+                // Update path information
+                pathInfo[neighborVertex->getInfo().getCode()] = make_pair(currentVertex->getInfo().getCode(),
+                                                                          pathInfo[currentVertex->getInfo().getCode()].second + 1);
+
+                if (neighborVertex == destVertex) {
+                    // Found the destination, reconstruct the path
+                    vector<Airport> shortestPath;
+                    auto current = destVertex;
+                    while (current) {
+                        shortestPath.insert(shortestPath.begin(), current->getInfo());
+                        auto prevCode = pathInfo[current->getInfo().getCode()].first;
+                        current = (prevCode.empty()) ? nullptr : findVertex(Airport(prevCode));
+                    }
+                    resultPaths.push_back(shortestPath);
+                }
+            }
+        }
+    }
+
+    return resultPaths;
+}

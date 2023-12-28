@@ -25,6 +25,7 @@ class Application {
 public:
     Application();
     Airport getAirport(const std::string &code) const;
+    Airport getAirportByName(const std::string &name) const;
     Airline getAirline(const std::string &code) const;
     const Graph &getGraph();
     const std::vector<Airport> &getAirports();
@@ -68,6 +69,10 @@ public:
     //3.9
     std::set<Airport> essentialAirports() const;
     std::set<Airport> findArticulationPoints() const;
+
+    //4.1
+    std::vector<std::vector<Airport>> bestFlightAirportToAirport(const std::string &airport1,
+                                                                                   const std::string &airport2);
 };
 
 

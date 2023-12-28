@@ -53,4 +53,12 @@ size_t Airport::getTrafficCapacity() const {
     return trafficCapacity_;
 }
 
+const std::string &Airport::getName() const {
+    return name_;
+}
+
+Airport::Airport(const std::string &code) {
+    code_ = code;
+}
+
 Airport::Airport() = default;
