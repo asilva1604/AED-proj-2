@@ -23,7 +23,7 @@ const std::wstring &Airport::getWcode() const {
     return wcode_;
 }
 
-bool Airport::operator==(const Airport &other) {
+bool Airport::operator==(const Airport &other) const{
     if (other.getCode() == code_) return true;
     return false;
 }
@@ -43,6 +43,14 @@ const std::string &Airport::getCountry() const {
 
 bool Airport::operator<(const Airport &obj) const{
     return this->code_<obj.code_;
+}
+
+void Airport::setTrafficCapacity(size_t capacity) {
+    trafficCapacity_ = capacity;
+}
+
+size_t Airport::getTrafficCapacity() const {
+    return trafficCapacity_;
 }
 
 Airport::Airport() = default;

@@ -20,14 +20,16 @@
 class Application {
     std::unique_ptr<std::vector<Airport>> airports_;
     std::unique_ptr<std::vector<Airline>> airlines_;
-    std::unique_ptr<Graph<Airport>> flightNetwork_;
+    std::unique_ptr<Graph> flightNetwork_;
 
 public:
     Application();
     Airport getAirport(const std::string &code) const;
     Airline getAirline(const std::string &code) const;
-    const Graph<Airport> &getGraph();
+    const Graph &getGraph();
     const std::vector<Airport> &getAirports();
+
+    //3.1
     size_t getAirportCount();
     size_t getFlightCount();
 
@@ -44,7 +46,7 @@ public:
     //3.4
     size_t numberOfDifferentCountriesAirportFliesTo(const string &airportCode);
     size_t numberOfDifferentCountriesCityFliesTo(const string &city);
-    vector<Vertex<Airport> *> getAirportsInCity(const string &city);
+    vector<std::shared_ptr<Vertex>> getAirportsInCity(const string &city);
 
     //3.5
     size_t numberOfCitiesFromAirport(const string &airportCode);
@@ -57,7 +59,16 @@ public:
     size_t numberOfCountriesFromAirportWithStops(const string &airportCode, int stops);
 
     //3.7
-    std::vector<std::pair<std::string, std::string>> tripsWithGreatestNumberOfStopsFromAirport(const string &airportCode);
+    std::vector<std::pair<std::pair<std::string, std::string>, int>> tripsWithGreatestNumberOfStopsFromAirport(const string &airportCode);
+    std::vector<std::pair<std::pair<std::string, std::string>, int>> tripsWithGreatestNumberOfStops();
+
+
+    //3.8
+    std::vector<Airport> airportsWithGreatestTrafficCapacity(size_t k) const;
+
+    //3.9
+    std::set<Airport> essentialAirports() const;
+    std::set<Airport> findArticulationPoints() const;
 };
 
 
