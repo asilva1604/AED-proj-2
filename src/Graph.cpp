@@ -496,7 +496,7 @@ vector<Airport> Graph::topsort() const {
     return res;
 }
 
-vector<vector<pair<Airport, Airline>>>
+vector<vector<Airport>>
 Graph::bfsShortestPath(const Airport &source, const Airport &destination) const {
     // Resetting visited status
     for (const auto &vertexPair : vertexSet) {
@@ -515,14 +515,14 @@ Graph::bfsShortestPath(const Airport &source, const Airport &destination) const 
 
     if (!sourceVertex || !destVertex) {
         // Invalid source or destination
-        return vector<vector<pair<Airport, Airline>>>();
+        return vector<vector<Airport>>();
     }
 
     vertexQueue.push(sourceVertex);
     sourceVertex->setVisited(true);
     pathInfo[source.getCode()] = make_tuple("", 0, Airline());
 
-    vector<vector<pair<Airport, Airline>>> resultPaths;
+    vector<vector<Airport>> resultPaths;
 
     while (!vertexQueue.empty()) {
         auto currentVertex = vertexQueue.front();
@@ -542,10 +542,10 @@ Graph::bfsShortestPath(const Airport &source, const Airport &destination) const 
 
                 if (neighborVertex == destVertex) {
                     // Found the destination, reconstruct the path
-                    vector<pair<Airport, Airline>> shortestPath;
+                    vector<Airport> shortestPath;
                     auto current = destVertex;
                     while (current) {
-                        shortestPath.insert(shortestPath.begin(), make_pair(current->getInfo(), std::get<2>(pathInfo[current->getInfo().getCode()])));
+                        shortestPath.insert(shortestPath.begin(), current->getInfo());
                         auto prevCode = std::get<0>(pathInfo[current->getInfo().getCode()]);
                         current = (prevCode.empty()) ? nullptr : findVertex(prevCode);
                     }
@@ -558,7 +558,7 @@ Graph::bfsShortestPath(const Airport &source, const Airport &destination) const 
     return resultPaths;
 }
 
-vector<vector<pair<Airport, Airline>>>
+vector<vector<Airport>>
 Graph::bfsShortestPath(shared_ptr<Vertex> sourceVertex, shared_ptr<Vertex> destVertex) const {
     // Resetting visited status
     for (const auto &vertexPair : vertexSet) {
@@ -572,14 +572,14 @@ Graph::bfsShortestPath(shared_ptr<Vertex> sourceVertex, shared_ptr<Vertex> destV
     unordered_map<string, tuple<string, int, Airline>> pathInfo;
     if (!sourceVertex || !destVertex) {
         // Invalid source or destination
-        return vector<vector<pair<Airport, Airline>>>();
+        return vector<vector<Airport>>();
     }
 
     vertexQueue.push(sourceVertex);
     sourceVertex->setVisited(true);
     pathInfo[sourceVertex->getInfo().getCode()] = make_tuple("", 0, Airline());
 
-    vector<vector<pair<Airport, Airline>>> resultPaths;
+    vector<vector<Airport>> resultPaths;
 
     while (!vertexQueue.empty()) {
         auto currentVertex = vertexQueue.front();
@@ -599,10 +599,10 @@ Graph::bfsShortestPath(shared_ptr<Vertex> sourceVertex, shared_ptr<Vertex> destV
 
                 if (neighborVertex == destVertex) {
                     // Found the destination, reconstruct the path
-                    vector<pair<Airport, Airline>> shortestPath;
+                    vector<Airport> shortestPath;
                     auto current = destVertex;
                     while (current) {
-                        shortestPath.insert(shortestPath.begin(), make_pair(current->getInfo(), std::get<2>(pathInfo[current->getInfo().getCode()])));
+                        shortestPath.insert(shortestPath.begin(), current->getInfo());
                         auto prevCode = std::get<0>(pathInfo[current->getInfo().getCode()]);
                         current = (prevCode.empty()) ? nullptr : findVertex(prevCode);
                     }

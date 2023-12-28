@@ -72,31 +72,31 @@ public:
     std::set<Airport> findArticulationPoints() const;
 
     //4.1
-    std::vector<std::vector<std::pair<Airport, Airline>>> bestFlightAirportToAirport(const std::string &airport1,
+    std::vector<std::vector<Airport>> bestFlightAirportToAirport(const std::string &airport1,
                                                                                    const std::string &airport2);
-    std::vector<std::vector<std::pair<Airport, Airline>>> bestFlightAirportToCity(const std::string &airport,
+    std::vector<std::vector<Airport>> bestFlightAirportToCity(const std::string &airport,
                                                                                   const std::string &city);
-    std::vector<std::vector<std::pair<Airport, Airline>>> bestFlightAirportToLocation(const std::string &airport,
+    std::vector<std::vector<Airport>> bestFlightAirportToLocation(const std::string &airport,
                                                                                       const long double &latitude,
                                                                                       const long double &longitude);
     //4.2
-    std::vector<std::vector<std::pair<Airport, Airline>>> bestFlightCityToCity(const std::string &sourceCity,
+    std::vector<std::vector<Airport>> bestFlightCityToCity(const std::string &sourceCity,
                                                                                const std::string &destinationCity);
-    std::vector<std::vector<std::pair<Airport, Airline>>> bestFlightCityToAirport(const std::string &city,
+    std::vector<std::vector<Airport>> bestFlightCityToAirport(const std::string &city,
                                                                                   const std::string airport);
-    std::vector<std::vector<std::pair<Airport, Airline>>> bestFlightCityToLocation(const std::string &city,
+    std::vector<std::vector<Airport>> bestFlightCityToLocation(const std::string &city,
                                                                                       const long double &latitude,
                                                                                       const long double &longitude);
 
     //4.3
-    std::vector<std::vector<std::pair<Airport, Airline>>> bestFlightLocationToLocation(const long double &sourceLatitude,
+    std::vector<std::vector<Airport>> bestFlightLocationToLocation(const long double &sourceLatitude,
                                                                                        const long double &sourceLongitude,
                                                                                        const long double &destLatitude,
                                                                                        const long double &destLongitude);
-    std::vector<std::vector<std::pair<Airport, Airline>>> bestFlightLocationToAirport(const long double &latitude,
+    std::vector<std::vector<Airport>> bestFlightLocationToAirport(const long double &latitude,
                                                                                       const long double &longitude,
                                                                                       const std::string &airport);
-    std::vector<std::vector<std::pair<Airport, Airline>>> bestFlightLocationToCity(const long double &latitude,
+    std::vector<std::vector<Airport>> bestFlightLocationToCity(const long double &latitude,
                                                                                    const long double &longitude,
                                                                                    const std::string &city);
     std::vector<Airport> findAirportsNearLocation(const long double &latitude, const long double &longitude);

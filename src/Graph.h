@@ -105,8 +105,8 @@ public:
     size_t getNumEdge() const;
     vector<Airport> bfsWithSteps(const Airport &source, int step) const;
     vector<std::pair<Airport, int>> bfsFurthestVertices(const Airport &source) const;
-    vector<vector<pair<Airport, Airline>>> bfsShortestPath(const Airport &source, const Airport &destination) const;
-    vector<vector<pair<Airport, Airline>>> bfsShortestPath(shared_ptr<Vertex> source, shared_ptr<Vertex> destination) const;
+    vector<vector<Airport>> bfsShortestPath(const Airport &source, const Airport &destination) const;
+    vector<vector<Airport>> bfsShortestPath(shared_ptr<Vertex> source, shared_ptr<Vertex> destination) const;
 };
 
 #endif //AED_PROJ_2_GRAPH_H
