@@ -491,3 +491,115 @@ Application::bestFlightCityToAirport(const string &city, const std::string airpo
     return res;
 }
 
+std::vector<std::vector<std::pair<Airport, Airline>>>
+Application::bestFlightLocationToLocation(const long double &sourceLatitude, const long double &sourceLongitude,
+                                          const long double &destLatitude, const long double &destLongitude) {
+
+    auto sourceAirports = findAirportsNearLocation(sourceLatitude, sourceLongitude);
+    auto destinationAirports = findAirportsNearLocation(destLatitude, destLongitude);
+
+    std::vector<std::vector<std::pair<Airport, Airline>>> res;
+
+    for (const auto &sourceAirport : sourceAirports) {
+        for (const auto &destinationAirport : destinationAirports) {
+            for (const auto &i : flightNetwork_->bfsShortestPath(sourceAirport, destinationAirport)) {
+                res.push_back(i);
+            }
+        }
+    }
+
+    return res;
+}
+
+std::vector<Airport> Application::findAirportsNearLocation(const long double &latitude, const long double &longitude) {
+    std::vector<Airport> nearbyAirports;
+
+    for (const auto &airport : *airports_) {
+        long double latDiff = airport.getLatitude() - latitude;
+        long double lonDiff = airport.getLongitude() - longitude;
+
+        // Use Pythagorean theorem to calculate distance
+        long double distance = std::sqrt(latDiff * latDiff + lonDiff * lonDiff);
+
+        // Check if the distance is within the specified maximum distance
+        if (distance <= 0.5) {
+            nearbyAirports.push_back(airport);
+        }
+    }
+
+    return nearbyAirports;
+}
+
+std::vector<std::vector<std::pair<Airport, Airline>>>
+Application::bestFlightAirportToLocation(const string &airport, const long double &latitude,
+                                         const long double &longitude) {
+    auto destinationAirports = findAirportsNearLocation(latitude, longitude);
+
+    std::vector<std::vector<std::pair<Airport, Airline>>> res;
+
+    auto source = getAirport(airport);
+
+    for (const auto &destinationAirport : destinationAirports) {
+        for (const auto &i : flightNetwork_->bfsShortestPath(source, destinationAirport)) {
+            res.push_back(i);
+        }
+    }
+
+    return res;
+}
+
+std::vector<std::vector<std::pair<Airport, Airline>>>
+Application::bestFlightCityToLocation(const string &city, const long double &latitude, const long double &longitude) {
+    auto sourceAirports = getAirportsInCity(city);
+    auto destinationAirports = findAirportsNearLocation(latitude, longitude);
+
+    std::vector<std::vector<std::pair<Airport, Airline>>> res;
+
+    for (const auto &source : sourceAirports) {
+        for (const auto &destinationAirport : destinationAirports) {
+            for (const auto &i : flightNetwork_->bfsShortestPath(source->getInfo(), destinationAirport)) {
+                res.push_back(i);
+            }
+        }
+    }
+    return res;
+}
+
+std::vector<std::vector<std::pair<Airport, Airline>>>
+Application::bestFlightLocationToAirport(const long double &latitude, const long double &longitude,
+                                         const string &airport) {
+
+    auto sourceAirports = findAirportsNearLocation(latitude, longitude);
+
+    std::vector<std::vector<std::pair<Airport, Airline>>> res;
+
+    auto destinationAirport = getAirport(airport);
+
+    for (const auto &sourceAirport : sourceAirports) {
+        for (const auto &i : flightNetwork_->bfsShortestPath(sourceAirport, destinationAirport)) {
+            res.push_back(i);
+        }
+    }
+
+    return res;
+}
+
+std::vector<std::vector<std::pair<Airport, Airline>>>
+Application::bestFlightLocationToCity(const long double &latitude, const long double &longitude, const string &city) {
+    auto sourceAirports = findAirportsNearLocation(latitude, longitude);
+    auto destinationAirports = getAirportsInCity(city);
+
+    std::vector<std::vector<std::pair<Airport, Airline>>> res;
+
+    for (const auto &source : sourceAirports) {
+        auto sourceAirport = flightNetwork_->findVertex(source);
+        for (const auto &destinationAirport : destinationAirports) {
+            for (const auto &i : flightNetwork_->bfsShortestPath(sourceAirport, destinationAirport)) {
+                res.push_back(i);
+            }
+        }
+    }
+
+    return res;
+}
+

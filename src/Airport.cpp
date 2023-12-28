@@ -10,8 +10,8 @@ Airport::Airport(const std::string &code, const std::string &name, const std::st
     name_ = name;
     city_ = city;
     country_ = country;
-    latitude_ = latitude;
-    longitude_ = longitude;
+    latitude_ = std::stold(latitude);
+    longitude_ = std::stold(longitude);
     wcode_ = std::wstring(code.begin(), code.end());
 }
 
@@ -59,6 +59,14 @@ const std::string &Airport::getName() const {
 
 Airport::Airport(const std::string &code) {
     code_ = code;
+}
+
+const long double &Airport::getLatitude() const {
+    return latitude_;
+}
+
+const long double &Airport::getLongitude() const {
+    return longitude_;
 }
 
 Airport::Airport() = default;
