@@ -8,11 +8,8 @@ int main() {/*
     Application app;
 
     auto start = std::chrono::high_resolution_clock::now();
-    for (const auto &trip : app.bestFlightAirportToAirport("OPO", "LIS")){
-        for (const auto &flight : trip) {
-            std::cout << flight.first << " " << flight.second.getCode() << "||";
-        }
-        std::cout << std::endl;
+    for (const auto &airline : app.airlinesAvailableForFlight(Airport("OPO"), Airport("LIS"))){
+
     }
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);

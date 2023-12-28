@@ -73,6 +73,8 @@ public:
     //4.1
     std::vector<std::vector<std::pair<Airport, Airline>>> bestFlightAirportToAirport(const std::string &airport1,
                                                                                    const std::string &airport2);
+
+    std::vector<std::string> airlinesAvailableForFlight(const Airport &source, const Airport &destination) const;
 };
 
 

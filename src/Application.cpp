@@ -411,3 +411,18 @@ Airport Application::getAirportByName(const string &name) const {
     return {};
 }
 
+std::vector<std::string>
+Application::airlinesAvailableForFlight(const Airport &source, const Airport &destination) const {
+    auto sourceVertex = flightNetwork_->findVertex(source);
+
+    std::vector<std::string> res;
+
+    for (const auto &e : sourceVertex->getAdj()) {
+        if (e.getDest()->getInfo() == destination) {
+            res.push_back(e.getAirline().getCode());
+        }
+    }
+
+    return res;
+}
+
