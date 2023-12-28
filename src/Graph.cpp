@@ -557,3 +557,60 @@ Graph::bfsShortestPath(const Airport &source, const Airport &destination) const 
 
     return resultPaths;
 }
+
+vector<vector<pair<Airport, Airline>>>
+Graph::bfsShortestPath(shared_ptr<Vertex> sourceVertex, shared_ptr<Vertex> destVertex) const {
+    // Resetting visited status
+    for (const auto &vertexPair : vertexSet) {
+        vertexPair.second->setVisited(false);
+    }
+
+    // Queue for BFS
+    queue<std::shared_ptr<Vertex>> vertexQueue;
+
+    // Map to store the path, number of stops, and airline for each airport
+    unordered_map<string, tuple<string, int, Airline>> pathInfo;
+    if (!sourceVertex || !destVertex) {
+        // Invalid source or destination
+        return vector<vector<pair<Airport, Airline>>>();
+    }
+
+    vertexQueue.push(sourceVertex);
+    sourceVertex->setVisited(true);
+    pathInfo[sourceVertex->getInfo().getCode()] = make_tuple("", 0, Airline());
+
+    vector<vector<pair<Airport, Airline>>> resultPaths;
+
+    while (!vertexQueue.empty()) {
+        auto currentVertex = vertexQueue.front();
+        vertexQueue.pop();
+
+        for (const auto &edge : currentVertex->getAdj()) {
+            auto neighborVertex = edge.getDest();
+
+            if (!neighborVertex->isVisited()) {
+                neighborVertex->setVisited(true);
+                vertexQueue.push(neighborVertex);
+
+                // Update path information
+                pathInfo[neighborVertex->getInfo().getCode()] = make_tuple(currentVertex->getInfo().getCode(),
+                                                                           std::get<1>(pathInfo[currentVertex->getInfo().getCode()]) + 1,
+                                                                           edge.getAirline());
+
+                if (neighborVertex == destVertex) {
+                    // Found the destination, reconstruct the path
+                    vector<pair<Airport, Airline>> shortestPath;
+                    auto current = destVertex;
+                    while (current) {
+                        shortestPath.insert(shortestPath.begin(), make_pair(current->getInfo(), std::get<2>(pathInfo[current->getInfo().getCode()])));
+                        auto prevCode = std::get<0>(pathInfo[current->getInfo().getCode()]);
+                        current = (prevCode.empty()) ? nullptr : findVertex(prevCode);
+                    }
+                    resultPaths.push_back(shortestPath);
+                }
+            }
+        }
+    }
+
+    return resultPaths;
+}

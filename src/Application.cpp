@@ -379,7 +379,6 @@ std::set<Airport> Application::essentialAirports() const {
 
 std::vector<std::vector<std::pair<Airport, Airline>>>
 Application::bestFlightAirportToAirport(const string &airport1, const string &airport2) {
-    //TODO: MAYBE CREATE FLIGHT CLASS THAT HAS SOURCE, DEST, AND FLIGHT
     Airport airport1Obj;
     Airport airport2Obj;
     if (airport1.length() == 3) {
@@ -420,6 +419,72 @@ Application::airlinesAvailableForFlight(const Airport &source, const Airport &de
     for (const auto &e : sourceVertex->getAdj()) {
         if (e.getDest()->getInfo() == destination) {
             res.push_back(e.getAirline().getCode());
+        }
+    }
+
+    return res;
+}
+
+std::vector<std::vector<std::pair<Airport, Airline>>>
+Application::bestFlightCityToCity(const string &sourceCity, const string &destinationCity) {
+    auto airportsInSourceCity = getAirportsInCity(sourceCity);
+    auto airportsInDestinationCity = getAirportsInCity(destinationCity);
+
+    std::vector<std::vector<std::pair<Airport, Airline>>> res;
+
+    for (const auto &sourceAirport : airportsInSourceCity) {
+        for (const auto &destinationAirport : airportsInDestinationCity) {
+            for (const auto &i : flightNetwork_->bfsShortestPath(sourceAirport, destinationAirport)) {
+                res.push_back(i);
+            }
+        }
+    }
+
+    return res;
+}
+
+std::vector<std::vector<std::pair<Airport, Airline>>>
+Application::bestFlightAirportToCity(const string &airport, const string &city) {
+    Airport airport1Obj;
+    if (airport.length() == 3) {
+        auto airportObj = getAirport(airport);
+        airport1Obj = airportObj;
+    } else {
+        auto airportObj = getAirportByName(airport);
+        airport1Obj = airportObj;
+    }
+
+    auto airportVertex = flightNetwork_->findVertex(airport1Obj);
+    auto airportsInDestinationCity = getAirportsInCity(city);
+
+    std::vector<std::vector<std::pair<Airport, Airline>>> res;
+    for (const auto &destinationAirport : airportsInDestinationCity) {
+        for (const auto &i : flightNetwork_->bfsShortestPath(airportVertex, destinationAirport)) {
+            res.push_back(i);
+        }
+    }
+
+    return res;
+}
+
+std::vector<std::vector<std::pair<Airport, Airline>>>
+Application::bestFlightCityToAirport(const string &city, const std::string airport) {
+    Airport airport1Obj;
+    if (airport.length() == 3) {
+        auto airportObj = getAirport(airport);
+        airport1Obj = airportObj;
+    } else {
+        auto airportObj = getAirportByName(airport);
+        airport1Obj = airportObj;
+    }
+
+    auto airportVertex = flightNetwork_->findVertex(airport1Obj);
+    auto airportsInSourceCity = getAirportsInCity(city);
+
+    std::vector<std::vector<std::pair<Airport, Airline>>> res;
+    for (const auto &sourceAirport : airportsInSourceCity) {
+        for (const auto &i : flightNetwork_->bfsShortestPath(sourceAirport, airportVertex)) {
+            res.push_back(i);
         }
     }
 
