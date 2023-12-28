@@ -62,7 +62,6 @@ public:
     std::vector<std::pair<std::pair<std::string, std::string>, int>> tripsWithGreatestNumberOfStopsFromAirport(const string &airportCode);
     std::vector<std::pair<std::pair<std::string, std::string>, int>> tripsWithGreatestNumberOfStops();
 
-
     //3.8
     std::vector<Airport> airportsWithGreatestTrafficCapacity(size_t k) const;
 

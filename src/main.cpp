@@ -9,7 +9,6 @@ int main() {/*
 
     auto start = std::chrono::high_resolution_clock::now();
     auto vec = app.airportsWithGreatestTrafficCapacity(10);
-
     for (auto trip : app.tripsWithGreatestNumberOfStops()){
         std::cout << trip.second << " " << trip.first.first << " " << trip.first.second << std::endl;
     }

@@ -103,10 +103,9 @@ public:
     vector<Airport> topsort() const;
     bool isDAG() const;
     size_t getNumEdge() const;
-
     vector<Airport> bfsWithSteps(const Airport &source, int step) const;
-
     vector<std::pair<Airport, int>> bfsFurthestVertices(const Airport &source) const;
+    vector<Airport> bfsFurthestVertices(const Airport &source) const;
 };
 
 #endif //AED_PROJ_2_GRAPH_H

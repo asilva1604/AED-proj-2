@@ -179,7 +179,6 @@ size_t Application::numberOfDifferentCountriesCityFliesTo(const std::string &cit
     unordered_set<std::string> countries;
 
     size_t res = 0;
-
     for (const auto& airport : airportsInCity) {
         for (const Edge& destinyAirports : airport->getAdj()){
             countries.insert(destinyAirports.getDest()->getInfo().getCountry());
@@ -252,7 +251,6 @@ std::vector<std::pair<std::pair<std::string, std::string>, int>> Application::tr
 
     std::vector<std::pair<Airport, int>> mostStops = flightNetwork_->bfsFurthestVertices(airport->getInfo());
     std::vector<std::pair<std::pair<std::string, std::string>, int>> trips;
-
     trips.reserve(mostStops.size());
     for (const auto& dest_airport : mostStops){
         trips.push_back({{airportCode, dest_airport.first.getCode()}, dest_airport.second});
@@ -310,7 +308,6 @@ size_t Application::numberOfCountriesFromAirport(const string &airportCode) {
 std::vector<Airport> Application::airportsWithGreatestTrafficCapacity(size_t k) const{
     auto copyMap(flightNetwork_->getVertexSet());
     vector<std::shared_ptr<Vertex>> copy;
-
     copy.reserve(copyMap.size());
     for (const auto& p : copyMap) copy.push_back(p.second);
 

@@ -16,7 +16,6 @@ namespace std {
 
 size_t Vertex::getNumDifferentAirlines() {
     std::unordered_set<std::string> airlines;
-
     for (const auto& e : adj) {
         airlines.insert(e.getAirline().getCode());
     }
