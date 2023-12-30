@@ -866,6 +866,7 @@ void Interface::run(){
     while(location != -1){
 
         system("clear");
+        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
 
         switch (location){
             case 0:       //============================= LOADING SCREEN ===============================//
@@ -1117,7 +1118,7 @@ void Interface::run(){
                 break;
 
             case 26:
-                airline_analised_object = app->getAirline(std::string(airport_analised.begin(), airline_analised.end()));
+                airline_analised_object = app->getAirline(converter.to_bytes(airline_analised));
                 printDirectory(directory);
                 printOptions(options[location], selected, table_mode);
                 printMonoinformation(L"The " + bold + airline_analised + end_effect + L" Airline is called " +
