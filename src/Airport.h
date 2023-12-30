@@ -13,8 +13,8 @@ class Airport {
     std::string name_;
     std::string city_;
     std::string country_;
-    std::string latitude_;
-    std::string longitude_;
+    long double latitude_;
+    long double longitude_;
     std::wstring wcode_;
     std::wstring wname_;
     std::wstring wcity_;
@@ -28,6 +28,7 @@ public:
     Airport(const std::string &code, const std::string &name, const std::string &city, const std::string &country,
             const std::string &latitude, const std::string &longitude);
     Airport();
+    Airport(const std::string &code); //dummy constructor
     const std::string &getCode() const;
     bool operator==(const Airport &other) const;
     friend std::ostream& operator<<(std::ostream &stream, const Airport &airport);
@@ -52,6 +53,11 @@ public:
     const std::wstring &getWlatitude() const;
 
     const std::wstring &getWlongitude() const;
+    const std::string &getName() const;
+
+    const long double &getLatitude() const;
+    const long double &getLongitude() const;
+
 };
 
 

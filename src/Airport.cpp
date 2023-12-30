@@ -18,6 +18,9 @@ Airport::Airport(const std::string &code, const std::string &name, const std::st
     wcountry_ = std::wstring(country_.begin(), country_.end());
     wlatitude_ = std::wstring(latitude_.begin(), latitude_.end());
     wlongitude_ = std::wstring(longitude_.begin(), longitude_.end());
+    latitude_ = std::stold(latitude);
+    longitude_ = std::stold(longitude);
+    wcode_ = std::wstring(code.begin(), code.end());
 }
 
 const std::string &Airport::getCode() const {
@@ -76,6 +79,22 @@ void Airport::setTrafficCapacity(size_t capacity) {
 
 size_t Airport::getTrafficCapacity() const {
     return trafficCapacity_;
+}
+
+const std::string &Airport::getName() const {
+    return name_;
+}
+
+Airport::Airport(const std::string &code) {
+    code_ = code;
+}
+
+const long double &Airport::getLatitude() const {
+    return latitude_;
+}
+
+const long double &Airport::getLongitude() const {
+    return longitude_;
 }
 
 Airport::Airport() = default;
