@@ -30,6 +30,8 @@ public:
     Airline getAirline(const std::string &code) const;
     const Graph &getGraph();
     const std::vector<Airport> &getAirports();
+  
+    const vector<Airline> &getAirlines();
 
     //3.1
     size_t getAirportCount();
@@ -53,7 +55,6 @@ public:
     //3.5
     size_t numberOfCitiesFromAirport(const string &airportCode);
     size_t numberOfAirportsFromAirport(const string &airportCode);
-    size_t numberOfCountriesFromAirport(const string &airportCode);
 
     //3.6
     size_t numberOfAirportsFromAirportWithStops(const string &airportCode, int steps);
@@ -61,8 +62,8 @@ public:
     size_t numberOfCountriesFromAirportWithStops(const string &airportCode, int stops);
 
     //3.7
-    std::vector<std::pair<std::pair<std::string, std::string>, int>> tripsWithGreatestNumberOfStopsFromAirport(const string &airportCode);
-    std::vector<std::pair<std::pair<std::string, std::string>, int>> tripsWithGreatestNumberOfStops();
+    std::vector<std::pair<std::pair<Airport, Airport>, int>> tripsWithGreatestNumberOfStopsFromAirport(const string &airportCode);
+    std::vector<std::pair<std::pair<Airport, Airport>, int>> tripsWithGreatestNumberOfStops();
 
     //3.8
     std::vector<Airport> airportsWithGreatestTrafficCapacity(size_t k) const;
@@ -70,7 +71,7 @@ public:
     //3.9
     std::set<Airport> essentialAirports() const;
     std::set<Airport> findArticulationPoints() const;
-
+  
     //4.1
     std::vector<std::vector<Airport>> bestFlightAirportToAirport(const std::string &airport1,
                                                                  const std::string &airport2,

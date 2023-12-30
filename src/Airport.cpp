@@ -10,6 +10,14 @@ Airport::Airport(const std::string &code, const std::string &name, const std::st
     name_ = name;
     city_ = city;
     country_ = country;
+    latitude_ = latitude;
+    longitude_ = longitude;
+    wcode_ = std::wstring(code_.begin(), code_.end());
+    wname_ = std::wstring(name_.begin(), name_.end());
+    wcity_ = std::wstring(city_.begin(), city_.end());
+    wcountry_ = std::wstring(country_.begin(), country_.end());
+    wlatitude_ = std::wstring(latitude_.begin(), latitude_.end());
+    wlongitude_ = std::wstring(longitude_.begin(), longitude_.end());
     latitude_ = std::stold(latitude);
     longitude_ = std::stold(longitude);
     wcode_ = std::wstring(code.begin(), code.end());
@@ -19,8 +27,28 @@ const std::string &Airport::getCode() const {
     return code_;
 }
 
+const std::wstring &Airport::getWname() const {
+    return wname_;
+}
+
 const std::wstring &Airport::getWcode() const {
     return wcode_;
+}
+
+const std::wstring &Airport::getWcity() const {
+    return wcity_;
+}
+
+const std::wstring &Airport::getWcountry() const {
+    return wcountry_;
+}
+
+const std::wstring &Airport::getWlatitude() const {
+    return wlatitude_;
+}
+
+const std::wstring &Airport::getWlongitude() const {
+    return wlongitude_;
 }
 
 bool Airport::operator==(const Airport &other) const{
