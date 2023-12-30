@@ -234,6 +234,7 @@ public:
     const Airline &getAirline() const;
 
     friend class Graph; // Allow Graph and Vertex classes to access private members of Edge.
+    friend class Vertex;
 
 };
 

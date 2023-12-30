@@ -19,8 +19,8 @@
  * @brief Represents an application managing airports, airlines, and flight information.
  */
 class Application {
-    std::unique_ptr<std::vector<Airport>> airports_; /**< Pointer to a vector containing airports. */
-    std::unique_ptr<std::vector<Airline>> airlines_;  /**< Pointer to a vector containing airlines. */
+    std::unique_ptr<std::unordered_map<std::string, Airport>> airports_; /**< Pointer to a vector containing airports. */
+    std::unique_ptr<std::unordered_map<std::string, Airline>> airlines_;  /**< Pointer to a vector containing airlines. */
     std::unique_ptr<Graph> flightNetwork_;           /**< Pointer to a graph representing the flight network. */
 
 public:
@@ -58,16 +58,16 @@ public:
     const Graph &getGraph();
 
     /**
-     * @brief Get the vector of airports.
-     * @return Const reference to the vector of airports.
+     * @brief Get the unordered map of airports.
+     * @return Const reference to the unordered map of airports.
      */
-    const std::vector<Airport> &getAirports();
+    const std::unordered_map<std::string, Airport> &getAirports();
 
     /**
-     * @brief Get the vector of airlines.
-     * @return Const reference to the vector of airlines.
+     * @brief Get the unordered map of airlines.
+     * @return Const reference to the unordered map of airlines.
      */
-    const std::vector<Airline> &getAirlines();
+    const std::unordered_map<std::string, Airline> &getAirlines();
 
     //3.1
     /**

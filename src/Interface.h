@@ -78,8 +78,8 @@ private:
     std::vector<int> locationOfAirlineSearch = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 00, 0, 0, 0, 1};
 
 
-    std::vector<Airport> airportsVector;
-    std::vector<Airline> airlineVector;
+    std::unordered_map<std::string, Airport> airportsVector;
+    std::unordered_map<std::string, Airline> airlineVector;
     std::vector<std::wstring> airportCodeVector;
     std::vector<std::wstring> airlineCodeVector;
     std::vector<std::wstring> citiesVector;
@@ -276,7 +276,7 @@ private:
 
     static void alphabeticSortVector(vector<std::wstring> &wstr);
 
-    void getAirportCodes(const vector<Airport>& airports);
+    void getAirportCodes(const unordered_map<std::string, Airport>& airports);
 
     void numeralWriteOptionsDefaulter();
 
@@ -284,7 +284,7 @@ private:
 
     void writeOptionDefaulterCity();
 
-    void getAirlineCodes(const vector<Airline> &airlines);
+    void getAirlineCodes(const unordered_map<std::string, Airline> &airlines);
 
     void writeOptionDefaulterAirline();
 };

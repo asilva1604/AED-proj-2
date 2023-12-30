@@ -19,22 +19,22 @@ void Interface::alphabeticSortVector(std::vector<std::wstring> &wstr){
     });
 }
 
-void Interface::getAirportCodes(const std::vector<Airport>& airports){
-    for (const Airport& airport : airports){
-        airportCodeVector.push_back(airport.getWcode());
+void Interface::getAirportCodes(const std::unordered_map<std::string, Airport>& airports){
+    for (const auto& airport : airports){
+        airportCodeVector.push_back(airport.second.getWcode());
     }
 }
 
-void Interface::getAirlineCodes(const std::vector<Airline>& airlines){
-    for (const Airline& airline : airlines){
-        airlineCodeVector.push_back(airline.getWcode());
+void Interface::getAirlineCodes(const std::unordered_map<std::string, Airline>& airlines){
+    for (const auto& airline : airlines){
+        airlineCodeVector.push_back(airline.second.getWcode());
     }
 }
 
 void Interface::getCities(){
-    for (const Airport& airport : app->getAirports()){
-        if (std::find(citiesVector.begin(), citiesVector.end(), airport.getWcity()) == citiesVector.end()){
-            citiesVector.push_back(airport.getWcity());
+    for (const auto& airport : app->getAirports()){
+        if (std::find(citiesVector.begin(), citiesVector.end(), airport.second.getWcity()) == citiesVector.end()){
+            citiesVector.push_back(airport.second.getWcity());
         }
     }
 }
