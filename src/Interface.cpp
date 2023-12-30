@@ -961,7 +961,7 @@ void Interface::run(){
                 printDirectory(directory);
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
-                printMonoinformation(L"There are " + bold + std::to_wstring(app->flightsOutboundOfAirport(std::string(airport_analised.begin(), airport_analised.end()))) + end_effect + L" Flights out of this Airport");
+                printMonoinformation(L"There are " + bold + std::to_wstring(app->flightsOutboundOfAirport(converter.to_bytes(airport_analised))) + end_effect + L" Flights out of this Airport");
                 inputer();
                 break;
 
@@ -969,12 +969,12 @@ void Interface::run(){
                 printDirectory(directory);
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
-                printMonoinformation(L"There are " + bold + std::to_wstring(app->airlinesOutboundOfAirport(std::string(airport_analised.begin(), airport_analised.end()))) + end_effect + L" Airlines out of this Airport");
+                printMonoinformation(L"There are " + bold + std::to_wstring(app->airlinesOutboundOfAirport(converter.to_bytes(airport_analised))) + end_effect + L" Airlines out of this Airport");
                 inputer();
                 break;
 
             case 11:       //========= STATISTICS > AIRPORT X > MORE INFO ==========//
-                airport_analised_object = app->getAirport(std::string(airport_analised.begin(), airport_analised.end()));
+                airport_analised_object = app->getAirport(converter.to_bytes(airport_analised));
                 printDirectory(directory);
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
@@ -996,7 +996,7 @@ void Interface::run(){
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
                 printMonoinformation(L"There are " + bold +
-                std::to_wstring(app->numberOfAirportsFromAirport(std::string(airport_analised.begin(), airport_analised.end())))
+                std::to_wstring(app->numberOfAirportsFromAirport(converter.to_bytes(airport_analised)))
                 + end_effect + L" airports reachable from this Airport");
                 inputer();
                 break;
@@ -1006,7 +1006,7 @@ void Interface::run(){
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
                 printMonoinformation(L"There are " + bold +
-                                     std::to_wstring(app->numberOfCitiesFromAirport(std::string(airport_analised.begin(), airport_analised.end())))
+                                     std::to_wstring(app->numberOfCitiesFromAirport(converter.to_bytes(airport_analised)))
                                      + end_effect + L" cities reachable from this Airport");
                 inputer();
                 break;
@@ -1016,7 +1016,7 @@ void Interface::run(){
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
                 printMonoinformation(L"There are " + bold +
-                                     std::to_wstring(app->numberOfDifferentCountriesAirportFliesTo(std::string(airport_analised.begin(), airport_analised.end())))
+                                     std::to_wstring(app->numberOfDifferentCountriesAirportFliesTo(converter.to_bytes(airport_analised)))
                                      + end_effect + L" countries reachable from this Airport");
                 inputer();
                 break;
@@ -1034,7 +1034,7 @@ void Interface::run(){
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
                 printMonoinformation(L"There are " + bold +
-                                     std::to_wstring(app->numberOfAirportsFromAirportWithStops(std::string(airport_analised.begin(), airport_analised.end()), std::stoi(num_write)))
+                                     std::to_wstring(app->numberOfAirportsFromAirportWithStops(converter.to_bytes(airport_analised), std::stoi(num_write)))
                                      + end_effect + L" airports reachable from this Airport in within " + num_write + L" stops");
                 inputer();
                 break;
@@ -1045,7 +1045,7 @@ void Interface::run(){
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
                 printMonoinformation(L"There are " + bold +
-                                     std::to_wstring(app->numberOfCitiesFromAirportWithStops(std::string(airport_analised.begin(), airport_analised.end()), std::stoi(num_write)))
+                                     std::to_wstring(app->numberOfCitiesFromAirportWithStops(converter.to_bytes(airport_analised), std::stoi(num_write)))
                                      + end_effect + L" cities reachable from this Airport in within " + num_write + L" stops");
                 inputer();
                 break;
@@ -1056,7 +1056,7 @@ void Interface::run(){
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
                 printMonoinformation(L"There are " + bold +
-                                     std::to_wstring(app->numberOfCountriesFromAirportWithStops(std::string(airport_analised.begin(), airport_analised.end()), std::stoi(num_write)))
+                                     std::to_wstring(app->numberOfCountriesFromAirportWithStops(converter.to_bytes(airport_analised), std::stoi(num_write)))
                                      + end_effect + L" countries reachable from this Airport in within " + num_write + L" stops");
                 inputer();
                 break;
@@ -1082,11 +1082,11 @@ void Interface::run(){
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
                 printMonoinformation(L"There are " + bold +
-                std::to_wstring(app->totalFlightsPerCity(std::string(city_analised.begin(), city_analised.end()))) +
+                std::to_wstring(app->totalFlightsPerCity(converter.to_bytes(city_analised))) +
                 end_effect + L" total flights in this city, where " +
-                std::to_wstring(app->inboundFlightsPerCity(std::string(city_analised.begin(), city_analised.end()))) +
+                std::to_wstring(app->inboundFlightsPerCity(converter.to_bytes(city_analised))) +
                 L" are inside the city boundaries and " +
-                std::to_wstring(app->outboundFlightsPerCity(std::string(city_analised.begin(), city_analised.end()))) +
+                std::to_wstring(app->outboundFlightsPerCity(converter.to_bytes(city_analised))) +
                 L" go outside the city boundaries");
                 inputer();
                 break;
@@ -1096,7 +1096,7 @@ void Interface::run(){
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
                 printMonoinformation(L"This city flies to " + bold +
-                                     std::to_wstring(app->numberOfDifferentCountriesCityFliesTo(std::string(city_analised.begin(), city_analised.end()))) +
+                                     std::to_wstring(app->numberOfDifferentCountriesCityFliesTo(converter.to_bytes(city_analised))) +
                                      end_effect + L" different countries");
                 inputer();
                 break;
@@ -1131,8 +1131,8 @@ void Interface::run(){
             case 27:
                 printDirectory(directory);
                 printOptions(options[location], selected, table_mode);
-                printMonoinformation(L"This airline has " + bold + std::to_wstring(app->flightsPerAirline(std::string(
-                        airline_analised.begin(), airport_analised.end())))
+                printMonoinformation(L"This airline has " + bold + std::to_wstring(app->flightsPerAirline(
+                        converter.to_bytes(airport_analised)))
                          + end_effect + L" flights");
                 printHelper(helpers, {0});
                 inputer();
