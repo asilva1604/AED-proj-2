@@ -10,14 +10,12 @@ Airport::Airport(const std::string &code, const std::string &name, const std::st
     name_ = name;
     city_ = city;
     country_ = country;
-    latitude_ = latitude;
-    longitude_ = longitude;
     wcode_ = std::wstring(code_.begin(), code_.end());
     wname_ = std::wstring(name_.begin(), name_.end());
     wcity_ = std::wstring(city_.begin(), city_.end());
     wcountry_ = std::wstring(country_.begin(), country_.end());
-    wlatitude_ = std::wstring(latitude_.begin(), latitude_.end());
-    wlongitude_ = std::wstring(longitude_.begin(), longitude_.end());
+    wlatitude_ = std::wstring(latitude.begin(), latitude.end());
+    wlongitude_ = std::wstring(longitude.begin(), longitude.end());
     latitude_ = std::stold(latitude);
     longitude_ = std::stold(longitude);
     wcode_ = std::wstring(code.begin(), code.end());

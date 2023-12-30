@@ -32,6 +32,7 @@ const std::wstring &Airline::getWcallsign() const {
 }
 const std::wstring &Airline::getWcountry() const {
     return wcountry_;
+}
 bool Airline::operator==(const Airline &other) const{
     return other.getCode() == code_;
 }
