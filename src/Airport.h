@@ -16,6 +16,11 @@ class Airport {
     std::string latitude_;
     std::string longitude_;
     std::wstring wcode_;
+    std::wstring wname_;
+    std::wstring wcity_;
+    std::wstring wcountry_;
+    std::wstring wlatitude_;
+    std::wstring wlongitude_;
 
     size_t trafficCapacity_ = 0;
 
@@ -38,6 +43,15 @@ public:
 
     size_t getTrafficCapacity() const;
 
+    const std::wstring &getWname() const;
+
+    const std::wstring &getWcity() const;
+
+    const std::wstring &getWcountry() const;
+
+    const std::wstring &getWlatitude() const;
+
+    const std::wstring &getWlongitude() const;
 };
 
 

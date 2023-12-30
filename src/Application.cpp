@@ -75,6 +75,10 @@ const std::vector<Airport> &Application::getAirports() {
     return *airports_;
 }
 
+const std::vector<Airline> &Application::getAirlines() {
+    return *airlines_;
+}
+
 size_t Application::getAirportCount() {
     return airports_->size();
 }
@@ -245,26 +249,26 @@ size_t Application::numberOfCountriesFromAirportWithStops(const std::string &air
     return countries.size();
 }
 
-std::vector<std::pair<std::pair<std::string, std::string>, int>> Application::tripsWithGreatestNumberOfStopsFromAirport(const std::string &airportCode){
+std::vector<std::pair<std::pair<Airport, Airport>, int>> Application::tripsWithGreatestNumberOfStopsFromAirport(const std::string &airportCode){
     auto airportObj = getAirport(airportCode);
     auto airport = flightNetwork_->findVertex(airportObj);
 
     std::vector<std::pair<Airport, int>> mostStops = flightNetwork_->bfsFurthestVertices(airport->getInfo());
-    std::vector<std::pair<std::pair<std::string, std::string>, int>> trips;
+    std::vector<std::pair<std::pair<Airport, Airport>, int>> trips;
     trips.reserve(mostStops.size());
     for (const auto& dest_airport : mostStops){
-        trips.push_back({{airportCode, dest_airport.first.getCode()}, dest_airport.second});
+        trips.push_back({{airportObj, dest_airport.first}, dest_airport.second});
     }
     return trips;
 }
 
-std::vector<std::pair<std::pair<std::string, std::string>, int>> Application::tripsWithGreatestNumberOfStops(){
+std::vector<std::pair<std::pair<Airport, Airport>, int>> Application::tripsWithGreatestNumberOfStops(){
     int max_length = INT8_MIN;
 
-    std::vector<std::pair<std::pair<std::string, std::string>, int>> longest_trips;
+    std::vector<std::pair<std::pair<Airport, Airport>, int>> longest_trips;
 
     for (const auto& vertex : flightNetwork_->getVertexSet()){
-        std::vector<std::pair<std::pair<std::string, std::string>, int>> trips = tripsWithGreatestNumberOfStopsFromAirport(vertex.second->getInfo().getCode());
+        std::vector<std::pair<std::pair<Airport, Airport>, int>> trips = tripsWithGreatestNumberOfStopsFromAirport(vertex.second->getInfo().getCode());
         if (trips[0].second > max_length){
             max_length = trips[0].second;
             longest_trips.clear();
@@ -290,20 +294,6 @@ size_t Application::numberOfAirportsFromAirport(const string &airportCode) {
 
     return airports.size();
 }
-
-size_t Application::numberOfCountriesFromAirport(const string &airportCode) {
-    auto airportObj = getAirport(airportCode);
-    auto airport = flightNetwork_->findVertex(airportObj);
-
-    std::set<std::string> cities;
-
-    for (const Edge& edge : airport->getAdj()){
-        cities.insert(edge.getDest()->getInfo().getCity());
-    }
-
-    return cities.size();
-}
-
 
 std::vector<Airport> Application::airportsWithGreatestTrafficCapacity(size_t k) const{
     auto copyMap(flightNetwork_->getVertexSet());

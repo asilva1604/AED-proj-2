@@ -24,49 +24,49 @@ std::wstring end_effect = L"\033[0m";
 
 std::vector<std::vector<std::wstring>> loadingDataAnimation = {
         {
-                L"█   ████  ██  ███  ███ ██  █ ███ ████    ███   ██  ███  ██              ",
-                L"█   █  █ █__█ █  █  █  █ █ █  █  █  _    █  █ █__█  █  █__█   █         ",
-                L"███ ████ █  █ ███  ███ █  ██ ███ ████    ███  █  █  █  █  █      █  █  █",
+                L"█   ████  ██  ███  ███ ██  █  ████    ███   ██  ███  ██              ",
+                L"█   █  █ █__█ █  █  █  █ █ █  █  _    █  █ █__█  █  █__█   █         ",
+                L"███ ████ █  █ ███  ███ █  ██  ████    ███  █  █  █  █  █      █  █  █",
         },
         {
-                L"█   ████  ██  ███  ███ ██  █ ███ ████    ███   ██  ███  ██              ",
-                L"█   █  █ █__█ █  █  █  █ █ █  █  █  _    █  █ █__█  █  █__█      █       ",
-                L"███ ████ █  █ ███  ███ █  ██ ███ ████    ███  █  █  █  █  █   █     █  █",
+                L"█   ████  ██  ███  ███ ██  █  ████    ███   ██  ███  ██              ",
+                L"█   █  █ █__█ █  █  █  █ █ █  █  _    █  █ █__█  █  █__█      █      ",
+                L"███ ████ █  █ ███  ███ █  ██  ████    ███  █  █  █  █  █   █     █  █",
         },
         {
-                L"█   ████  ██  ███  ███ ██  █ ███ ████    ███   ██  ███  ██              ",
-                L"█   █  █ █__█ █  █  █  █ █ █  █  █  _    █  █ █__█  █  █__█         █   ",
-                L"███ ████ █  █ ███  ███ █  ██ ███ ████    ███  █  █  █  █  █   █  █     █",
+                L"█   ████  ██  ███  ███ ██  █  ████    ███   ██  ███  ██              ",
+                L"█   █  █ █__█ █  █  █  █ █ █  █  _    █  █ █__█  █  █__█         █   ",
+                L"███ ████ █  █ ███  ███ █  ██  ████    ███  █  █  █  █  █   █  █     █",
         },
         {
-                L"█   ████  ██  ███  ███ ██  █ ███ ████    ███   ██  ███  ██              ",
-                L"█   █  █ █__█ █  █  █  █ █ █  █  █  _    █  █ █__█  █  █__█            █",
-                L"███ ████ █  █ ███  ███ █  ██ ███ ████    ███  █  █  █  █  █   █  █  █   ",
+                L"█   ████  ██  ███  ███ ██  █  ████    ███   ██  ███  ██              ",
+                L"█   █  █ █__█ █  █  █  █ █ █  █  _    █  █ █__█  █  █__█            █",
+                L"███ ████ █  █ ███  ███ █  ██  ████    ███  █  █  █  █  █   █  █  █   ",
         },
         {
-                L"█   ████  ██  ███  ███ ██  █ ███ ████    ███   ██  ███  ██              ",
-                L"█   █  █ █__█ █  █  █  █ █ █  █  █  _    █  █ █__█  █  █__█             ",
-                L"███ ████ █  █ ███  ███ █  ██ ███ ████    ███  █  █  █  █  █   █  █  █  █",
+                L"█   ████  ██  ███  ███ ██  █  ████    ███   ██  ███  ██              ",
+                L"█   █  █ █__█ █  █  █  █ █ █  █  _    █  █ █__█  █  █__█             ",
+                L"███ ████ █  █ ███  ███ █  ██  ████    ███  █  █  █  █  █   █  █  █  █",
         },
         {
-                L"█   ████  ██  ███  ███ ██  █ ███ ████    ███   ██  ███  ██              ",
-                L"█   █  █ █__█ █  █  █  █ █ █  █  █  _    █  █ █__█  █  █__█             ",
-                L"███ ████ █  █ ███  ███ █  ██ ███ ████    ███  █  █  █  █  █   █  █  █  █",
+                L"█   ████  ██  ███  ███ ██  █  ████    ███   ██  ███  ██              ",
+                L"█   █  █ █__█ █  █  █  █ █ █  █  _    █  █ █__█  █  █__█             ",
+                L"███ ████ █  █ ███  ███ █  ██  ████    ███  █  █  █  █  █   █  █  █  █",
         },
         {
-                L"█   ████  ██  ███  ███ ██  █ ███ ████    ███   ██  ███  ██              ",
-                L"█   █  █ █__█ █  █  █  █ █ █  █  █  _    █  █ █__█  █  █__█             ",
-                L"███ ████ █  █ ███  ███ █  ██ ███ ████    ███  █  █  █  █  █   █  █  █  █",
+                L"█   ████  ██  ███  ███ ██  █  ████    ███   ██  ███  ██              ",
+                L"█   █  █ █__█ █  █  █  █ █ █  █  _    █  █ █__█  █  █__█             ",
+                L"███ ████ █  █ ███  ███ █  ██  ████    ███  █  █  █  █  █   █  █  █  █",
         },
         {
-                L"█   ████  ██  ███  ███ ██  █ ███ ████    ███   ██  ███  ██              ",
-                L"█   █  █ █__█ █  █  █  █ █ █  █  █  _    █  █ █__█  █  █__█             ",
-                L"███ ████ █  █ ███  ███ █  ██ ███ ████    ███  █  █  █  █  █   █  █  █  █",
+                L"█   ████  ██  ███  ███ ██  █  ████    ███   ██  ███  ██              ",
+                L"█   █  █ █__█ █  █  █  █ █ █  █  _    █  █ █__█  █  █__█             ",
+                L"███ ████ █  █ ███  ███ █  ██  ████    ███  █  █  █  █  █   █  █  █  █",
         },
         {
-                L"█   ████  ██  ███  ███ ██  █ ███ ████    ███   ██  ███  ██              ",
-                L"█   █  █ █__█ █  █  █  █ █ █  █  █  _    █  █ █__█  █  █__█             ",
-                L"███ ████ █  █ ███  ███ █  ██ ███ ████    ███  █  █  █  █  █   █  █  █  █",
+                L"█   ████  ██  ███  ███ ██  █  ████    ███   ██  ███  ██              ",
+                L"█   █  █ █__█ █  █  █  █ █ █  █  _    █  █ █__█  █  █__█             ",
+                L"███ ████ █  █ ███  ███ █  ██  ████    ███  █  █  █  █  █   █  █  █  █",
         }
 };
 
@@ -80,6 +80,14 @@ int frame = 0;
 std::wstring centerUp(const std::wstring& txtToCenter){
     if (getTerminalWidth() / 2 - txtToCenter.size() / 2 > 0){
         return std::wstring(getTerminalWidth() / 2 - txtToCenter.size() / 2, L' ') + txtToCenter;
+
+    }
+    return txtToCenter;
+}
+
+std::wstring centerUpAndLineUp(const std::wstring& txtToCenter, int lineUp){
+    if (getTerminalWidth() / 2 - lineUp > 0){
+        return std::wstring(getTerminalWidth() / 2 - lineUp, L' ') + txtToCenter;
 
     }
     return txtToCenter;
@@ -131,9 +139,9 @@ void printTextLoadingData(){
     if (frame > loadingDataAnimation.size() - 1){frame = 0;}
 }
 
-void printOptions(const std::vector<std::wstring>& options, unsigned long selected){
+void printOptions(const std::vector<std::wstring>& options, unsigned long selected, bool table_mode){
     for(const std::wstring& s : options){
-        if (s == options[selected]){
+        if (s == options[selected] && !table_mode){
             std::wcout << "< " << underline << bold << red << s << end_effect << L" >" << std::endl << L"\n";
         }
         else{
@@ -174,5 +182,62 @@ void printMonoinformation(const std::wstring& wstr){
     for (wchar_t c : wstr){
         wigly_underline.push_back(L'~');
     }
-    std::wcout << L" " << centerUp(red + wigly_underline + end_effect) << std::endl;
+    for (int i = 0; i < 6; i++){
+        wigly_underline.push_back(L'~');
+    }
+    std::wcout << centerUp(red + wigly_underline + end_effect) << std::endl;
+}
+
+void printGlobalStatisticsFurthestPathsInformation(const std::vector<std::pair<std::pair<Airport, Airport>, int>>& info){
+    std::wstring wigly_underline;
+    std::wcout << L"\n\n\n" << std::endl;
+    std::wstring topper = L"The trips with the greatest number of stops are :";
+    std::wcout << bold << centerUp(topper) << end_effect << std::endl;
+    for (wchar_t c : topper){
+        wigly_underline.push_back(L'~');
+    }
+
+    std::wcout << L"     " << centerUp(red + wigly_underline + end_effect) << L"\n" << std::endl;
+
+    for (const std::pair<std::pair<Airport, Airport>, int>& pair1 : info){
+        std::wstring wstr = L"-> From the airport " + underline + pair1.first.first.getWcode();
+        wstr.append(end_effect);
+        wstr.append(L" (" + pair1.first.first.getWname() + L") to ");
+        wstr.append(underline);
+        wstr.append(pair1.first.second.getWcode());
+        wstr.append(end_effect);
+        wstr.append(L" (" + pair1.first.second.getWname());
+        wstr.append(L");");
+        std::wcout << centerUpAndLineUp(wstr, 40) << std::endl;
+    }
+
+    std::wcout << L"\n     " << centerUpAndLineUp(bold + L"Having " + underline + std::to_wstring(info[0].second)
+    + end_effect + bold + L" stops" + end_effect, 40) << std::endl;
+}
+
+void printTableAirportCode(const std::vector<std::wstring>& wstring_list, int page, int elements_per_page, unsigned long selected_in_page, bool table_mode){
+    std::wcout << L"\n\n" << bold << L" -------------------------------- " << end_effect << L"\n";
+    int count = 0;
+    int count_for_selected = 0;
+    for (const std::wstring& wstr : wstring_list){
+        if (count >= page * elements_per_page && count < page * elements_per_page + elements_per_page){
+            if (count_for_selected == selected_in_page && table_mode){
+                std::wcout << L"| " << bg_light_red << italic << underline << bold
+                           << wstr << std::wstring(30 - wstr.size(), L' ') << end_italic << end_bg
+                           << end_effect << L" |" << std::endl;
+            }
+            else{
+                std::wcout << L"| " << wstr << std::wstring(30 - wstr.size(), L' ') << L" |" << std::endl;
+            }
+            count_for_selected ++;
+        }
+        count ++;
+    }
+    if (wstring_list.empty()){std::wcout << "|" << italic << L"  No results                    " << end_effect << "|" << std::endl;}
+    std::wcout << L"|" << bold << L"--------------------------------" << end_effect << L"|\n";
+    std::wcout << L"|" << italic << L" <('p')                  ('n')> " << end_italic << L"|" << std::endl;
+    std::wcout << L"|" << std::wstring(30 - std::to_string(page + 1).size() - std::to_string(wstring_list.size()/elements_per_page + 1).size(), ' ')
+    << bold << page + 1 << L"/" << wstring_list.size()/elements_per_page + 1 << end_effect << L" |" << std::endl;
+    std::wcout << bold << L" -------------------------------- " << end_effect << std::endl;
+    std::wcout << italic << L"\n Total Number : " << end_italic << bold<< wstring_list.size() << end_effect << std::endl;
 }
