@@ -1131,7 +1131,7 @@ void Interface::run(){
                 printDirectory(directory);
                 printOptions(options[location], selected, table_mode);
                 printMonoinformation(L"This airline has " + bold + std::to_wstring(app->flightsPerAirline(std::string(
-                        airline_analised.begin(), airport_analised.end())))
+                        airline_analised.begin(), airline_analised.end())))
                          + end_effect + L" flights");
                 printHelper(helpers, {0});
                 inputer();
