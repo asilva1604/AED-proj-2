@@ -135,6 +135,13 @@ void Interface::getTemporaryAirportCodesFromSet(const std::set<Airport>& airport
         temporaryAirportCodeVector.push_back(airport.getWcode());
     }
 }
+        
+
+void Interface::getAirportCodes(const std::unordered_map<std::string, Airport>& airports){
+    for (const auto& airport : airports){
+        airportCodeVector.push_back(airport.second.getWcode());
+    }
+}
 
 void Interface::getAirlineCodes(const std::unordered_map<std::string, Airline>& airlines){
     for (const auto& airline : airlines){
@@ -2268,6 +2275,7 @@ void Interface::run(){
     while(location != -1){
 
         system("clear");
+        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
 
         switch (location){
             case 0:       //============================= LOADING SCREEN ===============================//
@@ -2519,7 +2527,6 @@ void Interface::run(){
                 printHelper(helpers, {0});
                 inputer();
                 break;
-
             case 26:      //========= STATISTICS > X AIRLINE > MORE INFO ==========//
                 airline_analised_object = app->getAirline(converter.to_bytes(airline_analised));
                 printDirectory(directory);
