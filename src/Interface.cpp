@@ -135,13 +135,7 @@ void Interface::getTemporaryAirportCodesFromSet(const std::set<Airport>& airport
         temporaryAirportCodeVector.push_back(airport.getWcode());
     }
 }
-        
 
-void Interface::getAirportCodes(const std::unordered_map<std::string, Airport>& airports){
-    for (const auto& airport : airports){
-        airportCodeVector.push_back(airport.second.getWcode());
-    }
-}
 
 void Interface::getAirlineCodes(const std::unordered_map<std::string, Airline>& airlines){
     for (const auto& airline : airlines){
