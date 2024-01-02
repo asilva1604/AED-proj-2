@@ -216,28 +216,76 @@ void printGlobalStatisticsFurthestPathsInformation(const std::vector<std::pair<s
 }
 
 void printTableAirportCode(const std::vector<std::wstring>& wstring_list, int page, int elements_per_page, unsigned long selected_in_page, bool table_mode){
-    std::wcout << L"\n\n" << bold << L" -------------------------------- " << end_effect << L"\n";
+    std::wcout << L"\n\n" << bold << L" -------------------------------------------------------------- " << end_effect << L"\n";
     int count = 0;
     int count_for_selected = 0;
     for (const std::wstring& wstr : wstring_list){
         if (count >= page * elements_per_page && count < page * elements_per_page + elements_per_page){
             if (count_for_selected == selected_in_page && table_mode){
                 std::wcout << L"| " << bg_light_red << italic << underline << bold
-                           << wstr << std::wstring(30 - wstr.size(), L' ') << end_italic << end_bg
+                           << wstr << std::wstring(60 - wstr.size(), L' ') << end_italic << end_bg
                            << end_effect << L" |" << std::endl;
             }
             else{
-                std::wcout << L"| " << wstr << std::wstring(30 - wstr.size(), L' ') << L" |" << std::endl;
+                std::wcout << L"| " << wstr << std::wstring(60 - wstr.size(), L' ') << L" |" << std::endl;
             }
             count_for_selected ++;
         }
         count ++;
     }
-    if (wstring_list.empty()){std::wcout << "|" << italic << L"  No results                    " << end_effect << "|" << std::endl;}
-    std::wcout << L"|" << bold << L"--------------------------------" << end_effect << L"|\n";
-    std::wcout << L"|" << italic << L" <('p')                  ('n')> " << end_italic << L"|" << std::endl;
-    std::wcout << L"|" << std::wstring(30 - std::to_string(page + 1).size() - std::to_string(wstring_list.size()/elements_per_page + 1).size(), ' ')
+    if (wstring_list.empty()){std::wcout << "|" << italic << L"  No results                                                  " << end_effect << "|" << std::endl;}
+    std::wcout << L"|" << bold << L"--------------------------------------------------------------" << end_effect << L"|\n";
+    std::wcout << L"|" << italic << L" <('p')                                                ('n')> " << end_italic << L"|" << std::endl;
+    std::wcout << L"|" << std::wstring(60 - std::to_string(page + 1).size() - std::to_string(wstring_list.size()/elements_per_page + 1).size(), ' ')
     << bold << page + 1 << L"/" << wstring_list.size()/elements_per_page + 1 << end_effect << L" |" << std::endl;
-    std::wcout << bold << L" -------------------------------- " << end_effect << std::endl;
+    std::wcout << bold << L" -------------------------------------------------------------- " << end_effect << std::endl;
     std::wcout << italic << L"\n Total Number : " << end_italic << bold<< wstring_list.size() << end_effect << std::endl;
+}
+
+void printMiniTitle(const std::wstring& wstr){
+    std::wcout << L"  " << underline << wstr << end_effect << L"\n\n" << std::endl;
+}
+
+void printAirlinesChosen(const std::vector<std::wstring>& airlines){
+    int count = 0;
+    std::wcout << L"      " << bold << underline << L"Airlines preferred List" << end_effect;
+    std::wcout << L"\n" << bold << L" ----------------------------------------------------------------------------------------------------------------------------- " << end_effect << std::endl;
+    for (const std::wstring& ws : airlines){
+        if (count == 0){
+            std::wcout << L"| " << ws << L", ";
+        }
+        else if (count == 24){
+            std::wcout << ws << L" |" << std::endl;
+        }
+        else{
+            std::wcout << ws << L", ";
+        }
+        count ++;
+        if (count == 25){
+            count = 0;
+        }
+    }
+    if(airlines.empty()){
+        std::wcout << L"|" << italic << L"   No picks yet                                                                                                              " << end_italic << L"|";
+    }
+    std::wcout << L"\n" << bold << L" ----------------------------------------------------------------------------------------------------------------------------- " << end_effect << std::endl;
+}
+
+void printPossiblePaths(const std::vector<std::vector<Airport>>& vva){
+    for (const auto& va : vva){
+        std::wcout << L"\n |";
+        int count = 0;
+        for (const Airport& a : va){
+            if (count == va.size() - 1){
+                std::wcout << L" In " << a.getWcity() << L", " << a.getWcountry() << L"; Airport " << a.getWcode() << L" (" << a.getWname() << L") |";
+            }
+            else{
+                std::wcout << L" In " << a.getWcity() << L", " << a.getWcountry() << L"; Airport " << a.getWcode() << L" (" << a.getWname() << L") > ";
+            }
+            count ++;
+        }
+    }
+    if (vva.empty()){
+        std::wcout << L"\n\n  " << italic << L"No paths" << end_italic;
+    }
 }

@@ -6,8 +6,8 @@
 #include <chrono>
 
 Application::Application()
-        : airports_(std::make_unique<std::vector<Airport>>()),
-          airlines_(std::make_unique<std::vector<Airline>>()),
+        : airports_(std::make_unique<std::unordered_map<std::string, Airport>>()),
+          airlines_(std::make_unique<std::unordered_map<std::string, Airline>>()),
           flightNetwork_(std::make_unique<Graph>())
 {
     FileReader airlineData("../dataset/airlines.csv");
@@ -15,14 +15,14 @@ Application::Application()
     FileReader flightsData("../dataset/flights.csv");
 
     for (const auto &line : airportsData.getData()) {
-        airports_->emplace_back(line.at(0), line.at(1), line.at(2), line.at(3), line.at(4), line.at(5));
+        airports_->insert({line.at(0), Airport(line.at(0), line.at(1), line.at(2), line.at(3), line.at(4), line.at(5))});
     }
     for (const auto &line : airlineData.getData()) {
-        airlines_->emplace_back(line.at(0), line.at(1), line.at(2), line.at(3));
+        airlines_->insert({line.at(0), Airline(line.at(0), line.at(1), line.at(2), line.at(3))});
     }
 
     for (const auto& airport : *airports_) {
-        flightNetwork_->addVertex(airport);
+        flightNetwork_->addVertex(airport.second);
     }
 
     auto start = std::chrono::high_resolution_clock::now();
@@ -50,32 +50,26 @@ Application::Application()
 }
 
 Airport Application::getAirport(const std::string &code) const {
-    for (const auto &airport : *airports_) {
-        if (airport.getCode() == code) {
-            return airport;
-        }
-    }
-    return {};
+    auto it = airports_->find(code);
+    if (it == airports_->end()) return {};
+    return it->second;
 }
 
 Airline Application::getAirline(const std::string &code) const {
-    for (const auto &airline : *airlines_) {
-        if (airline.getCode() == code) {
-            return airline;
-        }
-    }
-    return {};
+    auto it = airlines_->find(code);
+    if (it == airlines_->end()) return {};
+    return it->second;
 }
 
 const Graph &Application::getGraph() {
     return *flightNetwork_;
 }
 
-const std::vector<Airport> &Application::getAirports() {
+const std::unordered_map<std::string, Airport> &Application::getAirports() {
     return *airports_;
 }
 
-const std::vector<Airline> &Application::getAirlines() {
+const std::unordered_map<std::string, Airline> &Application::getAirlines() {
     return *airlines_;
 }
 
@@ -296,6 +290,9 @@ size_t Application::numberOfAirportsFromAirport(const string &airportCode) {
 }
 
 std::vector<Airport> Application::airportsWithGreatestTrafficCapacity(size_t k) const{
+    if (k > 3019){
+        k = 3019;
+    }
     auto copyMap(flightNetwork_->getVertexSet());
     vector<std::shared_ptr<Vertex>> copy;
     copy.reserve(copyMap.size());
@@ -393,8 +390,8 @@ Application::bestFlightAirportToAirport(const string &airport1, const string &ai
 
 Airport Application::getAirportByName(const string &name) const {
     for (const auto &airport : *airports_) {
-        if (airport.getName() == name) {
-            return airport;
+        if (airport.second.getName() == name) {
+            return airport.second;
         }
     }
     return {};
@@ -505,15 +502,15 @@ std::vector<Airport> Application::findAirportsNearLocation(const long double &la
     std::vector<Airport> nearbyAirports;
 
     for (const auto &airport : *airports_) {
-        long double latDiff = airport.getLatitude() - latitude;
-        long double lonDiff = airport.getLongitude() - longitude;
+        long double latDiff = airport.second.getLatitude() - latitude;
+        long double lonDiff = airport.second.getLongitude() - longitude;
 
         // Use Pythagorean theorem to calculate distance
         long double distance = std::sqrt(latDiff * latDiff + lonDiff * lonDiff);
 
         // Check if the distance is within the specified maximum distance
         if (distance <= 0.5) {
-            nearbyAirports.push_back(airport);
+            nearbyAirports.push_back(airport.second);
         }
     }
 
