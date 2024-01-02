@@ -128,7 +128,7 @@ size_t Application::inboundFlightsPerCity(const std::string &city) {
     size_t res = 0;
 
     for (auto p : vertexVector) {
-        if (p.second->getInfo().getCity() == city) continue;
+        if (p.second->getInfo().getCity() != city) continue;
 
         for (const Edge &e : p.second->getAdj()) {
             if (e.getDest()->getInfo().getCity() == city) ++res;
@@ -145,7 +145,7 @@ size_t Application::flightsPerAirline(const std::string &airlineCode) {
     size_t res = 0;
     auto vertexVector = flightNetwork_->getVertexSet();
 
-    for (auto p : vertexVector) {
+    for (const auto& p : vertexVector) {
         for (const Edge &edge : p.second->getAdj()) {
             if (edge.getAirline().getCode() == airlineCode) ++res;
         }
@@ -290,6 +290,9 @@ size_t Application::numberOfAirportsFromAirport(const string &airportCode) {
 }
 
 std::vector<Airport> Application::airportsWithGreatestTrafficCapacity(size_t k) const{
+    if (k > 3019){
+        k = 3019;
+    }
     auto copyMap(flightNetwork_->getVertexSet());
     vector<std::shared_ptr<Vertex>> copy;
     copy.reserve(copyMap.size());
