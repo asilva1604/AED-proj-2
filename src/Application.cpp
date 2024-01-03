@@ -501,6 +501,8 @@ Application::bestFlightLocationToLocation(const long double &sourceLatitude, con
 std::vector<Airport> Application::findAirportsNearLocation(const long double &latitude, const long double &longitude) {
     std::vector<Airport> nearbyAirports;
 
+    long double min_dist = INT16_MAX;
+
     for (const auto &airport : *airports_) {
         long double latDiff = airport.second.getLatitude() - latitude;
         long double lonDiff = airport.second.getLongitude() - longitude;
@@ -508,11 +510,26 @@ std::vector<Airport> Application::findAirportsNearLocation(const long double &la
         // Use Pythagorean theorem to calculate distance
         long double distance = std::sqrt(latDiff * latDiff + lonDiff * lonDiff);
 
+
         // Check if the distance is within the specified maximum distance
-        if (distance <= 0.5) {
+        if (distance <= min_dist) {
+            min_dist = distance;
+        }
+    }
+    for (const auto &airport : *airports_) {
+        long double latDiff = airport.second.getLatitude() - latitude;
+        long double lonDiff = airport.second.getLongitude() - longitude;
+
+        // Use Pythagorean theorem to calculate distance
+        long double distance = std::sqrt(latDiff * latDiff + lonDiff * lonDiff);
+
+
+        // Check if the distance is within the specified maximum distance
+        if (distance <= min_dist) {
             nearbyAirports.push_back(airport.second);
         }
     }
+
 
     return nearbyAirports;
 }
@@ -775,7 +792,6 @@ Application::bestFlightLocationToCity(const long double &latitude, const long do
 
     return res;
 }
-
 
 
 

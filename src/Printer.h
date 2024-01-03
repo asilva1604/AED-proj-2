@@ -10,6 +10,7 @@
 #include <iostream>
 #include <vector>
 #include "Util.h"
+#include "Airline.h"
 
 //----------------- COLOR SCHEMES --------------------//
 std::wstring bg_light_red = L"\x1b[101m";
@@ -101,12 +102,12 @@ void printAnimatedAirplane(const std::vector<std::wstring>& draw, int sleep){
         if (getTerminalWidth() - space_size_for_animation + draw[0].size() <= draw[0].size()) {
             std::wcout << std::wstring(space_size_for_animation - draw[0].size(), L' ');
             std::wcout << bold << title_segment.substr(0, getTerminalWidth() + draw[0].size() - space_size_for_animation)
-            << end_effect << std::endl;
+                       << end_effect << std::endl;
         }
         else if (draw[0].size() >= space_size_for_animation){
             std::wcout << bold
-            << title_segment.substr(draw[0].size() - space_size_for_animation - 1, space_size_for_animation)
-            << end_effect << std::endl;
+                       << title_segment.substr(draw[0].size() - space_size_for_animation - 1, space_size_for_animation)
+                       << end_effect << std::endl;
         }
         else{
             std::wcout << wstring(space_size_for_animation - draw[0].size(), L' ');
@@ -212,7 +213,7 @@ void printGlobalStatisticsFurthestPathsInformation(const std::vector<std::pair<s
     }
 
     std::wcout << L"\n     " << centerUpAndLineUp(bold + L"Having " + underline + std::to_wstring(info[0].second)
-    + end_effect + bold + L" stops" + end_effect, 40) << std::endl;
+                                                  + end_effect + bold + L" stops" + end_effect, 40) << std::endl;
 }
 
 void printTableAirportCode(const std::vector<std::wstring>& wstring_list, int page, int elements_per_page, unsigned long selected_in_page, bool table_mode){
@@ -237,7 +238,7 @@ void printTableAirportCode(const std::vector<std::wstring>& wstring_list, int pa
     std::wcout << L"|" << bold << L"--------------------------------------------------------------" << end_effect << L"|\n";
     std::wcout << L"|" << italic << L" <('p')                                                ('n')> " << end_italic << L"|" << std::endl;
     std::wcout << L"|" << std::wstring(60 - std::to_string(page + 1).size() - std::to_string(wstring_list.size()/elements_per_page + 1).size(), ' ')
-    << bold << page + 1 << L"/" << wstring_list.size()/elements_per_page + 1 << end_effect << L" |" << std::endl;
+               << bold << page + 1 << L"/" << wstring_list.size()/elements_per_page + 1 << end_effect << L" |" << std::endl;
     std::wcout << bold << L" -------------------------------------------------------------- " << end_effect << std::endl;
     std::wcout << italic << L"\n Total Number : " << end_italic << bold<< wstring_list.size() << end_effect << std::endl;
 }
@@ -271,19 +272,29 @@ void printAirlinesChosen(const std::vector<std::wstring>& airlines){
     std::wcout << L"\n" << bold << L" ----------------------------------------------------------------------------------------------------------------------------- " << end_effect << std::endl;
 }
 
-void printPossiblePaths(const std::vector<std::vector<Airport>>& vva){
+void printPossiblePaths(const std::vector<std::vector<Airport>>& vva, const shared_ptr<Application>& app, const std::vector<wstring>& ca){
+    std::wcout << L"\n";
     for (const auto& va : vva){
-        std::wcout << L"\n |";
-        int count = 0;
-        for (const Airport& a : va){
-            if (count == va.size() - 1){
-                std::wcout << L" In " << a.getWcity() << L", " << a.getWcountry() << L"; Airport " << a.getWcode() << L" (" << a.getWname() << L") |";
+        std::wcout << L"  " << std::wstring(98, L'-') << std::endl;
+        for (int idx = 0; idx < va.size() - 1; idx ++){
+            int spaceCalc1 = 29 + va[idx].getWcode().size() + va[idx].getWname().size() +
+                             va[idx].getWcity().size() + va[idx].getWcountry().size();
+            int spaceCalc2 = 24 + va[idx + 1].getWcode().size() + va[idx + 1].getWname().size() +
+                             va[idx + 1].getWcountry().size() + va[idx + 1].getWcity().size();
+            int spaceCalc3 = 33;
+            std::wcout << L" | Go from " << va[idx].getWcode() << L" (" << va[idx].getWname() << L") Airport, in " <<
+                       va[idx].getWcity() << L", " << va[idx].getWcountry() << std::wstring(100 - spaceCalc1, L' ') << L"|" << L"\n | To " << va[idx + 1].getWcode() << L" (" << va[idx + 1].getWname() <<
+                       L") Airport, in " << va[idx + 1].getWcity() << L", " << va[idx + 1].getWcountry() << std::wstring(100 - spaceCalc2, L' ') << L"|" << std::endl;
+            std::wcout << L" | With the following Airlines : ";
+            for (auto airline : app->airlinesAvailableForFlight(va[idx], va[idx + 1])){
+                if (std::find(ca.begin(), ca.end(), std::wstring(airline.begin(), airline.end())) != ca.end()){
+                    std::wcout << std::wstring(airline.begin(), airline.end()) << L" ";
+                    spaceCalc3 += 4;
+                }
             }
-            else{
-                std::wcout << L" In " << a.getWcity() << L", " << a.getWcountry() << L"; Airport " << a.getWcode() << L" (" << a.getWname() << L") > ";
-            }
-            count ++;
+            std::wcout << std::wstring(100 - spaceCalc3, L' ') << L"|" << std::endl;
         }
+        std::wcout << L"  " << std::wstring(98, L'-') << std::endl;
     }
     if (vva.empty()){
         std::wcout << L"\n\n  " << italic << L"No paths" << end_italic;

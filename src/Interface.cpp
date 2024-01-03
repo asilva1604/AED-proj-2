@@ -2,6 +2,7 @@
 // Created by master on 23-12-2023.
 //
 
+#include <cstring>
 #include "Interface.h"
 #include "Printer.h"
 
@@ -231,38 +232,13 @@ std::wstring Interface::smooth_string(const std::wstring& w){
 
 
 std::vector<std::wstring> Interface::filterSearch(const std::vector<std::wstring>& wstrings){
-    int left = 0;
-    int right = wstrings.size() - 1;
-    int mid;
     std::vector<std::wstring> res;
     if (write.empty() || write == write_default){
         res = wstrings;
     }
-    else {
-        while (left <= right) {
-            mid = (left + right) / 2;
-            if (smooth_string(wstrings[mid].substr(0, write.size())) == smooth_string(write)) {
-                break;
-            } else if (smooth_string(wstrings[mid].substr(0, write.size())) < smooth_string(write)) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        if (mid != 0) {
-            while (smooth_string(wstrings[mid - 1].substr(0, write.size())) == smooth_string(write)) {
-                mid--;
-                if (mid == 0){
-                    break;
-                }
-            }
-        }
-        while (smooth_string(wstrings[mid].substr(0, write.size())) == smooth_string(write)) {
-            res.push_back(wstrings[mid]);
-            mid++;
-            if (mid == wstrings.size()){
-                break;
-            }
+    for (const std::wstring& wstr : wstrings){
+        if (smooth_string(wstr).substr(0, smooth_string(write).size()) == smooth_string(write)){
+            res.push_back(wstr);
         }
     }
     return res;
@@ -372,6 +348,14 @@ void Interface::numeralWriteOptionsDefaulter(){
     options[location][0] = L"Number of Stops: " + bold + num_write + end_effect;
     if (selected == 0 && !table_mode){
         options[location][0] = underline + bold + red + L"Insert Number of Stops -> " + end_effect + L"  " + num_write;
+        write_mode = true;
+    }
+}
+
+void Interface::numeralWriteOptionsDefaulter2(){
+    options[location][0] = L"Number of results shown: " + bold + num_write + end_effect;
+    if (selected == 0 && !table_mode){
+        options[location][0] = underline + bold + red + L"Insert Number of Results to see -> " + end_effect + L"  " + num_write;
         write_mode = true;
     }
 }
@@ -2384,7 +2368,7 @@ void Interface::run(){
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
                 printMonoinformation(L"The " + bold + airport_analised + end_effect + L" airport is named " + airport_analised_object.getWname() +
-                L" and is located in " + airport_analised_object.getWcity() + L", " + airport_analised_object.getWcountry());
+                                     L" and is located in " + airport_analised_object.getWcity() + L", " + airport_analised_object.getWcountry());
                 printMonoinformation(L"Its coordinates are " + bold + airport_analised_object.getWlatitude() + L", " + airport_analised_object.getWlongitude() + end_effect);
                 inputer();
                 break;
@@ -2401,8 +2385,8 @@ void Interface::run(){
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
                 printMonoinformation(L"There are " + bold +
-                std::to_wstring(app->numberOfAirportsFromAirport(converter.to_bytes(airport_analised)))
-                + end_effect + L" airports reachable from this Airport");
+                                     std::to_wstring(app->numberOfAirportsFromAirport(converter.to_bytes(airport_analised)))
+                                     + end_effect + L" airports reachable from this Airport");
                 inputer();
                 break;
 
@@ -2487,12 +2471,12 @@ void Interface::run(){
                 printOptions(options[location], selected, table_mode);
                 printHelper(helpers, {0});
                 printMonoinformation(L"There are " + bold +
-                std::to_wstring(app->totalFlightsPerCity(converter.to_bytes(city_analised))) +
-                end_effect + L" total flights in this city, where " +
-                std::to_wstring(app->inboundFlightsPerCity(converter.to_bytes(city_analised))) +
-                L" are inside the city boundaries and " +
-                std::to_wstring(app->outboundFlightsPerCity(converter.to_bytes(city_analised))) +
-                L" go outside the city boundaries");
+                                     std::to_wstring(app->totalFlightsPerCity(converter.to_bytes(city_analised))) +
+                                     end_effect + L" total flights in this city, where " +
+                                     std::to_wstring(app->inboundFlightsPerCity(converter.to_bytes(city_analised))) +
+                                     L" are inside the city boundaries and " +
+                                     std::to_wstring(app->outboundFlightsPerCity(converter.to_bytes(city_analised))) +
+                                     L" go outside the city boundaries");
                 inputer();
                 break;
 
@@ -2526,7 +2510,7 @@ void Interface::run(){
                 printDirectory(directory);
                 printOptions(options[location], selected, table_mode);
                 printMonoinformation(L"The " + bold + airline_analised + end_effect + L" Airline is called " +
-                airline_analised_object.getWname() + L", and it's callsign is " + airline_analised_object.getWcallsign());
+                                     airline_analised_object.getWname() + L", and it's callsign is " + airline_analised_object.getWcallsign());
                 printMonoinformation(L"This airline is from " + bold + airline_analised_object.getWcountry() + end_effect);
                 printHelper(helpers, {0});
                 inputer();
@@ -2544,7 +2528,7 @@ void Interface::run(){
 
             case 28:      //========= STATISTICS > GLOBAL STATISTICS > TOP K AIRPORTS GREATEST TRAFFIC ==========//
                 printDirectory(directory);
-                numeralWriteOptionsDefaulter();
+                numeralWriteOptionsDefaulter2();
                 printOptions(options[location], selected, table_mode);
                 temporaryAirportCodeVector.clear();
                 getTemporaryAirportCodes(app->airportsWithGreatestTrafficCapacity(std::stoi(num_write)));
@@ -2825,7 +2809,7 @@ void Interface::run(){
                     }
                 }
                 printHelper(helpers, {0});
-                printPossiblePaths(possiblePaths);
+                printPossiblePaths(possiblePaths, app, chosenAirlines);
                 inputer();
                 break;
         }

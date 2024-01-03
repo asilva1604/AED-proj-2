@@ -81,31 +81,31 @@ private:
     Airline airline_analised_object;
 
     std::vector<std::pair<std::pair<Airport, Airport>, int>> furthest_trips;
-                                                                                                                                           //31
+    //31
     std::vector<int> capOfWrite =              {0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 30, 0, 0, 0, 3, 0, 0, 0, 4, 0, 0
-                                                , 3, 0, 3, 0, 50, 50, 0, 30, 0, 3, 50, 30, 30, 15, 0, 3, 30, 50, 15, 15
-                                                , 15, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0};
+            , 3, 0, 3, 0, 50, 50, 0, 30, 0, 3, 50, 30, 30, 15, 0, 3, 30, 50, 15, 15
+            , 15, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0};
     std::vector<int> locationOfAirportSearch = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 00, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0
-                                                , 1, 0, 1, 0, 00, 00, 0, 00, 0, 1, 00, 00, 00, 00, 0, 1, 00, 00, 00, 00
-                                                , 00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            , 1, 0, 1, 0, 00, 00, 0, 00, 0, 1, 00, 00, 00, 00, 0, 1, 00, 00, 00, 00
+            , 00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     std::vector<int> locationHasTable =        {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 01, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0
-                                                , 1, 0, 1, 0, 01, 01, 0, 01, 0, 1, 01, 01, 01, 00, 0, 1, 01, 01, 00, 00
-                                                , 00, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0};
+            , 1, 0, 1, 0, 01, 01, 0, 01, 0, 1, 01, 01, 01, 00, 0, 1, 01, 01, 00, 00
+            , 00, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0};
     std::vector<int> locationOfNumWrite =      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 00, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0
-                                                , 0, 0, 0, 0, 00, 00, 0, 00, 0, 0, 00, 00, 00, 00, 0, 0, 00, 00, 00, 00
-                                                , 00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            , 0, 0, 0, 0, 00, 00, 0, 00, 0, 0, 00, 00, 00, 00, 0, 0, 00, 00, 00, 00
+            , 00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     std::vector<int> locationOfCitySearch =    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 01, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                                                , 0, 0, 0, 0, 00, 00, 0, 01, 0, 0, 00, 01, 01, 00, 0, 0, 00, 01, 00, 00
-                                                , 00, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0};
+            , 0, 0, 0, 0, 00, 00, 0, 01, 0, 0, 00, 01, 01, 00, 0, 0, 00, 01, 00, 00
+            , 00, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0};
     std::vector<int> locationOfAirlineSearch = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 00, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0
-                                                , 0, 0, 0, 0, 00, 00, 0, 00, 0, 0, 00, 00, 00, 00, 0, 0, 00, 00, 00, 00
-                                                , 00, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0};
+            , 0, 0, 0, 0, 00, 00, 0, 00, 0, 0, 00, 00, 00, 00, 0, 0, 00, 00, 00, 00
+            , 00, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0};
     std::vector<int> locationAirportNmeSearch= {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                                                , 0, 0, 0, 0, 01, 01, 0, 00, 0, 0, 01, 00, 00, 00, 0, 0, 01, 00, 00, 00
-                                                , 00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            , 0, 0, 0, 0, 01, 01, 0, 00, 0, 0, 01, 00, 00, 00, 0, 0, 01, 00, 00, 00
+            , 00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     std::vector<int> locationOfSecondWrite   = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                                                , 0, 0, 0, 0, 00, 00, 0, 00, 0, 0, 00, 00, 00, 01, 0, 0, 00, 00, 01, 01
-                                                , 01, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            , 0, 0, 0, 0, 00, 00, 0, 00, 0, 0, 00, 00, 00, 01, 0, 0, 00, 00, 01, 01
+            , 01, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 
     std::unordered_map<std::string, Airport> airportsVector;
@@ -126,317 +126,317 @@ private:
 
     std::vector<std::vector<std::wstring>> options{
             {
-                L""
+                    L""
             },
             {
-                L"Book a Flight",
-                L"Statistics",
-                L"Quit"
+                    L"Book a Flight",
+                    L"Statistics",
+                    L"Quit"
             },
             {
-                L"Global Statistics",
-                L"Choose an Airport",
-                L"Choose a City",
-                L"Choose an Airline",
-                L"Main Menu"
+                    L"Global Statistics",
+                    L"Choose an Airport",
+                    L"Choose a City",
+                    L"Choose an Airline",
+                    L"Main Menu"
             },
             {
-                L"Number of Airports",
-                L"Number of Available Flights",
-                L"Trip(s) with the Most Number of Stops",
-                L"Top k Airports with the Greatest air Traffic Capacity",
-                L"Essential Airports",
-                L"Back",
-                L"Main Menu"
+                    L"Number of Airports",
+                    L"Number of Available Flights",
+                    L"Trip(s) with the Most Number of Stops",
+                    L"Top k Airports with the Greatest air Traffic Capacity",
+                    L"Essential Airports",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for an Airport code",
-                L"Back",
-                L"Main Menu"
+                    L"Search for an Airport code",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"More Info on This Airport",
-                L"Number of Flights Out of this Airport",
-                L"Number of Different Airlines Out of this Airport",
-                L"Number of Destinations Available",
-                L"Number of Destinations Available in a Certain Number Of Stops",
-                L"Back",
-                L"Main Menu"
+                    L"More Info on This Airport",
+                    L"Number of Flights Out of this Airport",
+                    L"Number of Different Airlines Out of this Airport",
+                    L"Number of Destinations Available",
+                    L"Number of Destinations Available in a Certain Number Of Stops",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Number of Airports Available",
-                L"Number of Cities Available",
-                L"Number of Countries Available",
-                L"Back",
-                L"Main Menu"
+                    L"Number of Airports Available",
+                    L"Number of Cities Available",
+                    L"Number of Countries Available",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Number of Airports Available With Stops",
-                L"Number of Cities Available With Stops",
-                L"Number of Countries Available With Stops",
-                L"Back",
-                L"Main Menu"
+                    L"Number of Airports Available With Stops",
+                    L"Number of Cities Available With Stops",
+                    L"Number of Countries Available With Stops",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Number of Stops: " + bold + num_write + end_effect,
-                L"Back",
-                L"Main Menu"
+                    L"Number of Stops: " + bold + num_write + end_effect,
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Number of Stops: " + bold + num_write + end_effect,
-                L"Back",
-                L"Main Menu"
+                    L"Number of Stops: " + bold + num_write + end_effect,
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Number of Stops: " + bold + num_write + end_effect,
-                L"Back",
-                L"Main Menu"
+                    L"Number of Stops: " + bold + num_write + end_effect,
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for a City Name",
-                L"Back",
-                L"Main Menu"
+                    L"Search for a City Name",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Number of Flights in this City",
-                L"Number of Different Countries this City Flies to",
-                L"Back",
-                L"Main Menu"
+                    L"Number of Flights in this City",
+                    L"Number of Different Countries this City Flies to",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for an Airline code",
-                L"Back",
-                L"Main Menu"
+                    L"Search for an Airline code",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"More Info on this Airline",
-                L"Number of Flights of this Airline",
-                L"Back",
-                L"Main Menu"
+                    L"More Info on this Airline",
+                    L"Number of Flights of this Airline",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Number of Stops: " + bold + num_write + end_effect,
-                L"Back",
-                L"Main Menu"
+                    L"Number of Stops: " + bold + num_write + end_effect,
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Airport Code",
-                L"Airport Name",
-                L"City name",
-                L"Geographical coordinates",
-                L"Main Menu"
+                    L"Airport Code",
+                    L"Airport Name",
+                    L"City name",
+                    L"Geographical coordinates",
+                    L"Main Menu"
             },
             {
-                L"Search for an Airport Code",
-                L"Back",
-                L"Main Menu"
+                    L"Search for an Airport Code",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Airport Code",
-                L"Airport Name",
-                L"City name",
-                L"Geographical coordinates",
-                L"Back",
-                L"Main Menu"
+                    L"Airport Code",
+                    L"Airport Name",
+                    L"City name",
+                    L"Geographical coordinates",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for an Airport code",
-                L"Back",
-                L"Main Menu"
+                    L"Search for an Airport code",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for an Airport name",
-                L"Back",
-                L"Main Menu"
+                    L"Search for an Airport name",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for an Airport name",
-                L"Back",
-                L"Main Menu"
+                    L"Search for an Airport name",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for a City Name",
-                L"Back",
-                L"Main Menu"
+                    L"Search for a City Name",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Airport Code",
-                L"Airport Name",
-                L"City name",
-                L"Geographical coordinates",
-                L"Back",
-                L"Main Menu"
+                    L"Airport Code",
+                    L"Airport Name",
+                    L"City name",
+                    L"Geographical coordinates",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for an Airport code",
-                L"Back",
-                L"Main Menu"
+                    L"Search for an Airport code",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for an Airport name",
-                L"Back",
-                L"Main Menu"
+                    L"Search for an Airport name",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for a City Name",
-                L"Back",
-                L"Main Menu"
+                    L"Search for a City Name",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for a City Name",
-                L"Back",
-                L"Main Menu"
+                    L"Search for a City Name",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Write a Latitude",
-                L"Write a Longitude",
-                L"Done",
-                L"Back",
-                L"Main Menu",
+                    L"Write a Latitude",
+                    L"Write a Longitude",
+                    L"Done",
+                    L"Back",
+                    L"Main Menu",
             },
             {
-                L"Airport Code",
-                L"Airport Name",
-                L"City name",
-                L"Geographical coordinates",
-                L"Back",
-                L"Main Menu"
+                    L"Airport Code",
+                    L"Airport Name",
+                    L"City name",
+                    L"Geographical coordinates",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for an Airport code",
-                L"Back",
-                L"Main Menu"
+                    L"Search for an Airport code",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for an Airport name",
-                L"Back",
-                L"Main Menu"
+                    L"Search for an Airport name",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Search for a City Name",
-                L"Back",
-                L"Main Menu"
+                    L"Search for a City Name",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Write a Latitude",
-                L"Write a Longitude",
-                L"Done",
-                L"Back",
-                L"Main Menu",
+                    L"Write a Latitude",
+                    L"Write a Longitude",
+                    L"Done",
+                    L"Back",
+                    L"Main Menu",
             },
             {
-                L"Write a Latitude",
-                L"Write a Longitude",
-                L"Done",
-                L"Back",
-                L"Main Menu",
+                    L"Write a Latitude",
+                    L"Write a Longitude",
+                    L"Done",
+                    L"Back",
+                    L"Main Menu",
             },
             {
-                L"Write a Latitude",
-                L"Write a Longitude",
-                L"Done",
-                L"Back",
-                L"Main Menu",
+                    L"Write a Latitude",
+                    L"Write a Longitude",
+                    L"Done",
+                    L"Back",
+                    L"Main Menu",
             },
             {
-                L""
+                    L""
             },
             {
-                L""
+                    L""
             },
             {
-                L""
+                    L""
             },
             {
-                L""
+                    L""
             },
             {
-                L""
+                    L""
             },
             {
-                L""
+                    L""
             },
             {
-                L""
+                    L""
             },
             {
-                L""
+                    L""
             },
             {
-                L"Search for an Airline code",
-                L"Clear Airline Picks",
-                L"Add all Airlines to Airline picks",
-                L"Done",
-                L"Back",
-                L"Main Menu"
+                    L"Search for an Airline code",
+                    L"Clear Airline Picks",
+                    L"Add all Airlines to Airline picks",
+                    L"Done",
+                    L"Back",
+                    L"Main Menu"
             },
             {
-                L"Back",
-                L"Main Menu"
+                    L"Back",
+                    L"Main Menu"
             }
     };
 
@@ -521,4 +521,6 @@ private:
     static bool canBeDouble(const wstring& ws);
 
     void getForbiddenAirlines();
+
+    void numeralWriteOptionsDefaulter2();
 };
