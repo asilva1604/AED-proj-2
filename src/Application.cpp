@@ -128,7 +128,7 @@ size_t Application::inboundFlightsPerCity(const std::string &city) {
     size_t res = 0;
 
     for (auto p : vertexVector) {
-        if (p.second->getInfo().getCity() != city) continue;
+        if (p.second->getInfo().getCity() == city) continue;    //todo
 
         for (const Edge &e : p.second->getAdj()) {
             if (e.getDest()->getInfo().getCity() == city) ++res;
