@@ -2106,6 +2106,14 @@ void Interface::basicInputResponse(unsigned int user_in){
                         if (locationOfAirlineSearch[location]){filteredWstringVector = airlineCodeVector;}
                         earlier_locations.pop();
                         directory = directories[location];
+                        airport_analised.clear();
+                        second_airport_analised.clear();
+                        city_analised.clear();
+                        second_city_analised.clear();
+                        latitude_analised.clear();
+                        second_latitude_analised.clear();
+                        longitude_analised.clear();
+                        second_longitude_analised.clear();
                         selected = 0;
                         break;
                     case 1:
@@ -2114,6 +2122,14 @@ void Interface::basicInputResponse(unsigned int user_in){
                         directory = directories[location];
                         stackClear(earlier_locations);
                         selected = 0;
+                        airport_analised.clear();
+                        second_airport_analised.clear();
+                        city_analised.clear();
+                        second_city_analised.clear();
+                        latitude_analised.clear();
+                        second_latitude_analised.clear();
+                        longitude_analised.clear();
+                        second_longitude_analised.clear();
                         break;
                 }
                 break;
